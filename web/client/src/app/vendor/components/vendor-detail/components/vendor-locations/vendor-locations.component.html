@@ -1,0 +1,173 @@
+
+<!-- Locations Panel -->
+<div class="col-12 card shadow px-0">
+
+    <!-- Heading -->
+    <div class="card-header p-4 px-5">
+        <span class="large-heading">Locations</span>
+
+        <!-- Loading Spinner -->
+        <div *ngIf="susDataLoading" class="d-inline ml-2">
+            <i style="font-size: 24px;" class="fa fa-fort-cog fa-spin"></i>
+        </div>
+
+    </div>
+
+    <div class="row mx-0">
+        <div class="col px-0">
+
+            <!-- Fields -->
+            <ng-container *ngIf="!susDataLoading">
+
+                <div class="row mx-0 panel-content">
+                    <div class="col px-0">
+
+                        <!-- Incorporated -->
+                        <div class="row py-3 px-5 mt-3 mx-0 justify-content-between">
+
+                            <div class="col px-0">
+                                <span class="mr-3 text-uppercase">Incorporated</span>
+                            </div>
+
+                            <div class="col px-0 text-right">
+
+                                <span *ngIf="!susVendorLocations.incorporated">N/A</span>
+
+                                <ng-container *ngIf="susVendorLocations.incorporated">
+                                    
+                                    <div>
+                                        <span class="text-uppercase">{{susVendorLocations.incorporated.address_line1}}, </span>
+                                        <span class="text-uppercase">{{susVendorLocations.incorporated.city}}, </span>
+                                        <span class="text-uppercase">{{susVendorLocations.incorporated.state}}, </span>
+                                        <span class="text-uppercase">{{susVendorLocations.incorporated.country}}, </span>
+                                        <span>{{susVendorLocations.incorporated.zip | zip}}</span>
+                                    </div>
+
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <!-- Places of Performance -->
+                        <div class="row py-3 px-5 mt-3 mx-0 justify-content-between">
+                            <div class="col px-0">
+                                <span class="mr-3 text-uppercase">Places of Performance:</span>
+                            </div>
+
+                            <div class="col px-0 text-right">
+
+                                <span *ngIf="susVendorLocations.places_of_performances.length === 0">N/A</span>
+
+                                <ng-container  *ngIf="susVendorLocations.places_of_performances">
+                                    <ng-container *ngFor="let pop of susVendorLocations.places_of_performances; index as i">
+
+                                        <div>
+                                            <span class="text-uppercase">{{pop.city}}, </span>
+                                            <span class="text-uppercase">{{pop.state}}, </span>
+                                            <span class="text-uppercase">{{pop.country}}, </span>
+                                            <span>{{pop.zip | zip}}</span>
+                                        </div>
+
+                                    </ng-container>
+                                </ng-container>
+
+
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <!-- Billing -->
+                        <div class="row py-3 px-5 mt-3 mx-0 justify-content-between">
+
+                            <div class="col px-0">
+                                <span class="mr-3 text-uppercase">Billing Address</span>
+                            </div>
+
+                            <div class="col px-0 text-right">
+                                <span class="text-uppercase" *ngIf="susVendorLocations.billings">{{susVendorLocations.billings}}</span>
+                                <span *ngIf="!susVendorLocations.billings">N/A</span>
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <!-- Mailing -->
+                        <div class="row py-3 px-5 mt-3 mx-0 justify-content-between">
+
+                            <div class="col px-0">
+                                <span class="mr-3 text-uppercase">Mailing Address</span>
+                            </div>
+
+                            <div class="col px-0 text-right">
+                                
+                                <span *ngIf="!susVendorLocations.profile.mail.address_line1 && !susVendorLocations.profile.mail.state">N/A</span>
+
+                                <ng-container *ngIf="susVendorLocations.profile && susVendorLocations.profile.mail">
+
+                                    <div>
+                                        <span class="text-uppercase" *ngIf="susVendorLocations.profile.mail.address_line1">{{susVendorLocations.profile.mail.address_line1}}</span>
+                                        <span class="text-uppercase" *ngIf="susVendorLocations.profile.mail.address_line2">, {{susVendorLocations.profile.mail.address_line2}}</span>
+                                        <span class="text-uppercase" *ngIf="susVendorLocations.profile.mail.city">, {{susVendorLocations.profile.mail.city}}</span>
+                                        <span class="text-uppercase" *ngIf="susVendorLocations.profile.mail.state">, {{susVendorLocations.profile.mail.state}}</span>
+                                        <span *ngIf="susVendorLocations.profile.mail.zip">, {{susVendorLocations.profile.mail.zip | zip}}</span>
+                                    </div>
+
+                                </ng-container>
+
+                            </div>
+
+
+                        </div>
+
+                        <hr>
+
+                        <!-- Physical -->
+                        <div class="row py-3 px-5 mt-3 mx-0 justify-content-between">
+                            <div class="col px-0">
+                                <span class="mr-3 text-uppercase">Physical Address</span>
+                            </div>
+
+                            <div class="col px-0 text-right">
+                                
+                                <span *ngIf="!susVendorLocations.profile.physical.address_line1 && !susVendorLocations.profile.physical.state">N/A</span>
+
+                                <ng-container *ngIf="susVendorLocations.profile && susVendorLocations.profile.physical">
+
+                                    <div>
+                                        <span class="text-uppercase" *ngIf="susVendorLocations.profile.physical.address_line1">{{susVendorLocations.profile.physical.address_line1}}</span>
+                                        <span class="text-uppercase" *ngIf="susVendorLocations.profile.physical.address_line2">, {{susVendorLocations.profile.physical.address_line2}}</span>
+                                        <span class="text-uppercase" *ngIf="susVendorLocations.profile.physical.city">, {{susVendorLocations.profile.physical.city}}</span>
+                                        <span class="text-uppercase" *ngIf="susVendorLocations.profile.physical.state">, {{susVendorLocations.profile.physical.state}}</span>
+                                        <span *ngIf="susVendorLocations.profile.physical.zip">, {{susVendorLocations.profile.physical.zip | zip}}</span>
+                                    </div>
+
+                                </ng-container>
+
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+
+
+                    </div>
+    
+    
+                </div>
+
+            </ng-container>
+
+
+
+
+        </div>
+    </div>
+</div>
+

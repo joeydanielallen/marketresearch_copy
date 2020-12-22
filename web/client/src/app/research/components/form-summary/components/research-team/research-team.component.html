@@ -1,0 +1,55 @@
+
+<div class="row justify-content-end">
+
+    <div class="card col-12 col-lg-11 shadow rounded-lg">
+
+        <div class="row justify-content-center">
+
+        
+            <div class="col-11 px-0">
+                <h5 class="large-heading px-3 py-3 mb-0">Market Research Team</h5> 
+            </div>
+
+            <hr class="col-11 m-0 ">
+
+            <div class="col-11 px-3 mb-0">
+                
+                <div class="row my-4 mx-0">
+                    <div class="profile-pic-container col-1 px-0">
+                        <span class="rounded-circle"><p class="initials size-12">{{getTemplateInstance().createdByAppUser.firstName[0]}} {{getTemplateInstance().createdByAppUser.lastName[0]}}</p></span>
+                    </div>
+
+                    <div class="col-8 px-1 my-auto">
+                        <span class="small-heading">{{getTemplateInstance().createdByAppUser.firstName}} {{getTemplateInstance().createdByAppUser.lastName}}</span>
+                    </div>
+
+                    <div class="col-3 px-0 my-auto text-right">
+                        <span class="">Owner</span>
+                    </div>
+                </div>
+
+                <ng-container *ngFor="let appUser of getTemplateInstance().appUsers">
+                    <div class="row my-4 mx-0">
+                        <div class="profile-pic-container col-1 px-0">
+                            <span class="rounded-circle"><p class="initials size-12">{{appUser.firstName[0]}} {{appUser.lastName[0]}}</p></span>
+                        </div>
+    
+                        <div class="col-8 px-1 my-auto">
+                            <span class="small-heading">{{appUser.firstName}} {{appUser.lastName}}</span>
+                        </div>
+    
+                        <div class="col-3 px-0 my-auto text-right">
+                            <span class="">Contributor</span>
+                        </div>
+                    </div>
+                </ng-container>
+                
+
+            </div>
+
+        </div>
+                
+
+    </div>
+
+</div>

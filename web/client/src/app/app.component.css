@@ -1,0 +1,64 @@
+.body-row {
+  min-height: 88.5vh;
+  margin-left:0;
+  margin-right:0;
+}
+
+.body-row-login {
+  min-height: 100vh;
+  margin-left:0;
+  margin-right:0;
+}
+
+/* .container-fluid {
+  background-color: #EEF0F6;
+  padding-bottom:20px;
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-bottom: 1rem;
+} */
+
+.container-col {
+  padding: 5px;
+  background-color: #EEF0F6;
+}
+footer {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  line-height: 20px;
+}
+footer a {
+  display: flex;
+  align-items: center;
+}
+
+
+.poweredBy{
+  letter-spacing: 0.01em;
+  color: white;
+  font-style: 'Open Sans';
+  font-size: 9px;
+  line-height: 12px;
+  position: fixed;
+  left: 0px;
+  bottom: 5px;
+}
+
+
+
+
+
+@media screen and (max-width: 767px) {
+  .card-container > *:not(.circle-link) ,
+  .terminal {
+    width: 100%;
+  }
+  .card:not(.highlight-card) {
+    height: 16px;
+    margin: 8px 0;
+  }
+  .card.highlight-card span {
+    margin-left: 72px;
+  }
+}

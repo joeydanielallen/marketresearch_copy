@@ -1,0 +1,208 @@
+<div *ngIf="isLoading" class="m-5">
+    <i class="fa fa-fort-cog fa-spin icon "></i>&nbsp; Loading...
+</div>
+
+<div class="row justify-content-center" *ngIf="!isLoading && getTemplateInstance()">
+    <div class="col-12">
+
+        <div class="row mb-4 justify-content-between">
+            <div class="col-8 px-0">
+                <h5 class="large-heading">{{ getTemplateInstance().name }}</h5>
+                <h6 class="small-heading sub-heading">Created By {{ getTemplateInstance().createdByAppUser.firstName + " " + getTemplateInstance().createdByAppUser.lastName }}</h6>
+            </div>
+            <div *ngIf="autoSaveTime" class="mt-1 col-4 text-right">
+                <span class="autosave calibri">Autosaved at {{autoSaveTime | date:'h:mm:ss a'}}</span>
+            </div>
+        </div>
+
+        <div *ngIf="getTemplateInstance()">
+            <div class="row justify-content-start align-items-center">
+                    
+                <div class="col-6 px-0 my-2">
+                    <div class="row align-items-center">
+                        <span class="text-right col-3 text-capitalize small-heading calibri mr-3">Title: </span>
+                        <input [disabled]="getTemplateInstance().completedOn !== null || readOnly" class="question-input col-7 py-3" (change)="updateTitle($event)" [value]="getTemplateInstance().name">
+                    </div>
+                </div>
+                
+                <div class="col-6 px-0 my-2" *ngIf="getTemplateInstance().originalTemplateName !== getTemplateInstance().name">
+                    <div class="row align-items-center">
+                        <span class="text-right col-3 text-capitalize small-heading calibri mr-3">Template Name: </span>
+                        <span class="col-7">{{getTemplateInstance().originalTemplateName}}</span>
+                    </div>
+                </div>
+
+                <div class="col-6 px-0 my-2">
+                    <div class="row align-items-center">
+                        <span class="text-right col-3 text-capitalize small-heading calibri mr-3">Description: </span>
+                        <span class="col-7">{{getTemplateInstance().template.description}}</span>
+                    </div>
+                </div>
+                
+                <div class="col-6 px-0 my-3">
+                    <div class="row align-items-center">
+                        <span class="text-right col-3 text-capitalize small-heading calibri mr-3">Status: </span>
+                        <span class="col-7">{{(getTemplateInstance().completedOn !== null) ? 'Completed' : 'In Progress' }}</span>
+                    </div>
+                </div>
+
+                <div class="col-6 px-0 my-3">
+                    <div class="row align-items-center">
+                        <span class="text-right col-3 text-capitalize small-heading calibri mr-3">Creator: </span>
+                        <span class="col-7">{{getTemplateInstance().createdByAppUser.firstName + " " + getTemplateInstance().createdByAppUser.lastName}}</span>
+                    </div>
+                </div>
+
+                <div class="col-6 px-0 my-3">
+                    <div class="row align-items-center">
+                        <span class="text-right col-3 text-capitalize small-heading calibri mr-3">Created On: </span>
+                        <span class="col-7">{{getTemplateInstance().createdOn | date:'M/d/yyyy h:mm a'}}</span>
+                    </div>
+                </div>
+
+                
+                <div class="col-6 px-0 my-3" *ngIf="getTemplateInstance().completedOn !== null">
+                    <div class="row align-items-center">
+                        <span class="text-right col-3 text-capitalize small-heading calibri mr-3">Completed On: </span>
+                        <span class="col-7">{{getTemplateInstance().completedOn | date:'M/d/yyyy h:mm a'}}</span>
+                    </div>
+                </div>
+
+                <div class="col-6 px-0 my-3">
+                    <div class="row align-items-center">
+                        <span class="text-right mr-3 col-3 text-capitalize small-heading calibri">Users: </span>
+                        
+                        <div class="col-8 px-0 mb-2">
+                            <button *ngIf="showUsers === false" (click)="toggleShowUsers()" class="col-auto btn btn-md secondary mx-1 p-2"><span>Show Users</span></button>
+                            <button *ngIf="showUsers === true" (click)="toggleShowUsers()" class="col-auto btn btn-md clear mx-1 p-2"><span>Hide Users</span></button>
+                        </div>
+
+                        <div class="col-3 mr-3"></div>
+
+                        <div *ngIf="showUsers === true" class="col-8 px-0">
+                            <div class="row">
+
+                                <span class="mr-2" *ngIf="getTemplateInstance().appUsers.length === 0">No Other Users</span>
+                                <ng-container *ngFor="let user of getTemplateInstance().appUsers">
+                                    <button [disabled]="getTemplateInstance().completedOn !== null || readOnly" (click)="removeUser(user)" class="col-5 btn btn-md secondary mx-1 mb-1 p-2 user-button text-center"><span>{{user.firstName + " " + user.lastName}}</span></button>
+                                </ng-container>
+
+                                <button *ngIf="getTemplateInstance().completedOn === null && !readOnly" (click)="displayUserSearch()" class="profile-pic-container col-auto px-0 ml-2 border-0">
+                                    <span class="rounded-circle"><p class="initials">+</p></span>
+                                </button>
+
+                                <!-- <button  class="col-auto btn btn-md clear mx-1 p-2">Add User</button> -->
+
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+
+                        <ng-container *ngIf="showUserSearch === true && showUsers === true">
+                          
+                            <div class="col-3"></div>
+                            
+
+                            <div class="col-8 mt-2">
+                                <div class="row">
+
+
+                                    <div class="col-12 px-0">
+                                        <input [(ngModel)]="searchText" placeholder="First or Last Name" class=" col-12 col-lg-7 search-filter pl-2 py-3 mt-2" />
+                                        <button (click)="searchForUsers()" class="search-button col-12 col-lg-4 small-heading btn btn-lg secondary ml-0 ml-lg-2 mt-2 mt-lg-0">Search</button>
+                                    </div>
+                                    
+                                    <hr *ngIf="usersFound !== null" class="col-11">
+                            
+                                    
+                                    <ng-container *ngIf="usersFound === true">
+                                        <ng-container *ngFor="let userResult of userResults">
+
+                                            <div class="my-2 col-12">
+                                                <div class="row">
+                                                    <button (click)="addUser(userResult)" class="col-5 col-lg-3 small-heading btn btn-sm secondary">Add</button>
+                                                    <span class="col-6 ml-2 my-auto">{{userResult.fullName}}</span>
+                                                </div>
+
+                                            </div>
+                                            
+                                        </ng-container>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="usersFound === false">
+                                        <div class="my-2">
+                                            <span>No Users Found</span>
+                                        </div>
+                                    </ng-container>
+
+
+                                </div>
+                            </div>
+                                         
+                        </ng-container>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <app-sections (change)="changesMade()" [readOnly]="readOnly" [sections]="getTemplateInstance().template.sections"></app-sections>
+        </div>
+
+    </div>
+
+    <ng-container *ngIf="getTemplateInstance()">
+        <div class="col-12">
+            <div class="row justify-content-end mt-4">
+
+                <ng-container *ngIf="getTemplateInstance().completedOn === null">
+
+                    <button  
+                        (click)="manualSave()"
+                        [disabled]="!unSavedChanges"
+                        class="col-5 col-lg-4 col-xl-3 small-heading btn btn-lg clear py-3 mr-3"
+                        > Save Progress </button>
+
+                    <button  
+                        (click)="research_submit()"
+                        [disabled]="submittingResearch || !userIsCreator" 
+                        [ngClass]="{'secondary': !submittingResearch}" 
+                        class="col-5 col-lg-4 col-xl-3 small-heading btn btn-lg secondary py-3"
+                        > Complete </button>
+
+
+                </ng-container>
+                
+                <ng-container *ngIf="getTemplateInstance().completedOn !== null">
+
+
+                    <button  
+                    routerLink="./summary"
+                    [disabled]="exporting" 
+                    class="col-5 col-lg-4 col-xl-3 small-heading btn btn-lg clear py-3 mr-3"
+                    > View Summary </button>
+
+                    
+
+                    <button  
+                        (click)="reOpen()"
+                        [disabled]="reOpening || !userIsCreator"
+                        class="col-5 col-lg-4 col-xl-3 small-heading btn btn-lg secondary py-3 "
+                        > Re-Open </button>
+
+                </ng-container>
+
+
+
+            </div>
+        </div>
+    </ng-container>
+
+
+    
+</div>

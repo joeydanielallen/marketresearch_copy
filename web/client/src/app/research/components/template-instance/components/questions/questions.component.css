@@ -1,0 +1,175 @@
+
+span {
+    padding: 0 0;
+}
+
+
+.col-12 {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+
+textarea {
+    min-height: 150px;
+    padding: 15px !important;
+}
+
+.row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+
+
+
+textarea + div > a.icon {
+    color: var(--machine-mist);
+    position: absolute;
+    transform: translate( -40px, 15px);
+    
+}
+
+input + div > a.icon {
+    color: var(--machine-mist);
+    position: absolute;
+    transform: translate( -40px, -10px);
+}
+
+h6 + div > a.icon {
+    color: var(--machine-mist);
+}
+
+span + div > a.icon {
+    color: var(--machine-mist);
+}
+
+
+
+
+
+input[type="date"].help-icon-showing::-webkit-calendar-picker-indicator {
+    padding-right: 35px;
+    cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
+
+
+
+
+.help-icon:hover {
+    cursor: pointer;
+    color: var(--moss) !important;
+}
+
+
+.icon > i:hover {
+    color: var(--sustainment-blue);
+}
+
+
+.input-dollar-sign {
+    position: absolute;
+    transform: translate( 10px, 18px);
+    z-index: 2;
+}
+
+
+
+
+
+
+
+/* Custom Checkbox Icon */
+.checkbox-label {
+    display: block;
+    position: relative;
+    margin: auto;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 24px;
+    height: 24px;
+    width: 24px;
+    clear: both;
+}
+
+.checkbox-label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkbox-label .checkbox-custom {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 24px;
+    width: 24px;
+    background-color: transparent;
+    border-radius: 10%;
+    transition: all 0.3s ease-out;
+    border: 2px solid var(--light-gray);
+}
+
+
+.checkbox-label input:checked ~ .checkbox-custom {
+    background-color: var(--sustainment-blue);
+    border-radius: 10%;
+    transform: scale(1);
+    opacity:1;
+    border: 2px solid var(--sustainment-blue);
+}
+
+
+.checkbox-label .checkbox-custom::after {
+    position: absolute;
+    content: "";
+    left: 12px;
+    top: 12px;
+    height: 0px;
+    width: 0px;
+    border-radius: 5px;
+    border: solid white;
+    border-width: 0 3px 3px 0; 
+    transform: rotate(45deg) scale(0);
+    opacity:1;
+    transition: all 0.3s ease-out;
+}
+
+
+.checkbox-label input:checked ~ .checkbox-custom::after {
+    transform: rotate(45deg) scale(1);
+    opacity:1;
+    left: 8px;
+    top: 3px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0; 
+    background-color: transparent;
+    border-radius: 0;
+}
+
+
+
+
+.search-filter {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    height: 100%;
+    width: 90%;
+}
+
+
+.fa-fort-trash:hover {
+    cursor: pointer;
+}
+
+
+button:disabled {
+    cursor: default;
+}

@@ -1,0 +1,69 @@
+
+<!-- Industry Panel -->
+<div class="col-12 card shadow">
+    <div class="row p-4">
+        <div class="col">
+
+            <!-- Heading -->
+            <span class="large-heading">Industry Codes</span>
+
+            <!-- Loading Spinner -->
+            <div *ngIf="susDataLoading" class="d-inline ml-2">
+                <i style="font-size: 24px;" class="fa fa-fort-cog fa-spin"></i>
+            </div>
+
+            <hr>
+            
+            <!-- Fields -->
+            <ng-container *ngIf="!susDataLoading">
+
+                <div class="row panel-content">
+                    <div class="col">
+
+                        <!-- Primary NAICS -->
+                        <div class="row my-3 justify-content-between">
+
+                            <div class="col">
+                                <span class="mr-3 text-uppercase">Primary NAICS</span>
+                            </div>
+
+                            <div class="col text-right">
+                                <span class="text-uppercase" *ngIf="susVendorIndustry.naics_primary !== null">{{susVendorIndustry.naics_primary}}</span>
+                                <span *ngIf="susVendorIndustry.naics_primary === null">N/A</span>
+                            </div>
+
+                        </div>
+
+                        <!-- Other NAICS -->
+                        <div class="row my-3 justify-content-between">
+
+                            <div class="col">
+                                <span class="mr-3 text-uppercase">Other NAICS</span>
+                            </div>
+
+                            <div class="col text-right">
+
+                                <ng-container *ngIf="susVendorIndustry.naics && susVendorIndustry.naics.length > 0">
+                                    <ng-container *ngFor="let naic of susVendorIndustry.naics">
+                                        <span class="text-uppercase d-block">{{naic}}</span>
+                                    </ng-container>
+                                </ng-container>
+
+                                <span *ngIf="!susVendorIndustry.naics || susVendorIndustry.naics.length === 0">N/A</span>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </ng-container>
+
+
+
+        </div>
+    </div>
+</div>
+

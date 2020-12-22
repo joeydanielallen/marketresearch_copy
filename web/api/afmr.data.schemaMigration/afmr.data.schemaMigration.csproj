@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentMigrator" Version="3.2.4" />
+    <PackageReference Include="FluentMigrator.Extensions.SqlServer" Version="3.2.4" />
+    <PackageReference Include="FluentMigrator.Runner" Version="3.2.4" />
+    <PackageReference Include="FluentMigrator.Runner.SqlServer" Version="3.2.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DevTemplates\AddDataMigration.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AddDataMigration.cs</LastGenOutput>
+    </None>
+    <None Update="DevTemplates\AlterTableMigration.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AlterTableMigration.txt</LastGenOutput>
+    </None>
+    <None Update="DevTemplates\CreateEmptyMigration.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CreateEmptyMigration.cs</LastGenOutput>
+    </None>
+    <None Update="DevTemplates\CreateTableMigration.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CreateTableMigration.cs</LastGenOutput>
+    </None>
+    <None Update="DevTemplates\ExecuteSQLMigration.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ExecuteSQLMigration.txt</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+</Project>

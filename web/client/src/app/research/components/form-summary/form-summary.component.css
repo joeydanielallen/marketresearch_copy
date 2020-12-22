@@ -1,0 +1,59 @@
+.sub-heading {
+    opacity: 0.65;
+}
+
+
+
+.left-page-arrow, .right-page-arrow {
+    font-size: 20px;
+}
+
+.left-page-arrow:hover, .right-page-arrow:hover, .current-page-number:hover, .other-page-number:hover {
+    cursor: pointer;
+}
+
+
+
+.left-page-arrow:hover {
+    transform: scale(-1.5, 1.5);
+    transition: all 0.3s ease-in-out;
+}
+
+.right-page-arrow:hover {
+    transform: scale(1.5);
+    transition: all 0.3s ease-in-out;
+    
+}
+
+
+
+
+
+.current-page-number {
+    color: var(--black);
+}
+
+.other-page-number {
+    color: var(--light-gray);
+}
+
+
+.vendor-card {
+    flex-direction: row !important;
+}
+
+
+.vendor {
+    transform: scale(1);
+    /* box-shadow: 1px 1px 5px var(--dark-gray); */
+    transition: all 0.3s ease-in-out;
+    
+}
+
+.vendor:hover {
+    cursor: pointer;
+    transform: scale(1.03);
+    box-shadow: 1px 1px 5px var(--gray);
+    transition: all 0.3s ease-in-out;
+}
+

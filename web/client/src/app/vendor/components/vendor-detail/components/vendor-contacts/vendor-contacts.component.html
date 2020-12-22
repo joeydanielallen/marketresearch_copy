@@ -1,0 +1,87 @@
+
+<!-- Contacts Panel -->
+<div class="card col-12 shadow px-0">
+
+    <!-- Heading -->
+    <div class="card-header p-4 px-5">
+        <span class="large-heading">Contacts</span>
+
+        <!-- Loading Spinner -->
+        <div *ngIf="mrDataLoading" class="d-inline ml-2">
+            <i style="font-size: 24px;" class="fa fa-fort-cog fa-spin"></i>
+        </div>
+
+    </div>
+
+
+    <div class="row mx-0">
+        <div class="col-12 px-0">
+
+            <ng-container *ngIf="!mrDataLoading">
+
+
+                <div class="row mx-0 panel-content">
+                    <div class="col px-0">
+
+
+
+
+                        
+                        <!-- Null Check -->
+                        <ng-container *ngIf="!mrVendorDetail.vendorContacts || mrVendorDetail.vendorContacts.length < 1">
+                            <div class="row py-3 px-5 mt-2 mx-0">
+                                <span>There are no contacts for this vendor.</span>
+                            </div>
+                        </ng-container>
+
+                        <!-- Column Headers -->
+                        <ng-container *ngIf="mrVendorDetail.vendorContacts && mrVendorDetail.vendorContacts.length > 0">
+                            <div class="row py-3 px-5 mt-3 mx-0 justify-content-between text-center mb-3">
+                                <div class="col-3 bold small-heading ">Name</div>
+                                <div class="col-5 bold small-heading ">Email</div>
+                                <div class="col-3 bold small-heading ">Phone</div>
+                            </div>
+                        </ng-container>
+
+
+                        <!-- Column Data -->
+                        <ng-container *ngFor="let contact of mrVendorDetail.vendorContacts; let i = index">
+
+                            <hr *ngIf="i !== 0">
+
+                            <div class="row py-2 px-5 mx-0 justify-content-between text-center my-3 align-items-center">
+
+                                <div *ngIf="contact.name" class="col-3">{{contact.name}}</div>
+                                <div *ngIf="!contact.name" class="col-3">N/A</div>
+
+                                <div *ngIf="contact.email" class="col-5">{{contact.email}}</div>
+                                <div *ngIf="!contact.email" class="col-3">N/A</div>
+
+                                <div *ngIf="contact.phone" class="col-3">{{contact.phone}}</div>
+                                <div *ngIf="!contact.phone" class="col-3">N/A</div>
+                            </div>
+
+                        </ng-container>
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+
+
+
+
+            </ng-container>
+
+
+
+        </div>
+
+    </div>
+</div>

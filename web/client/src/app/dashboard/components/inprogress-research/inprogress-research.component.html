@@ -1,0 +1,68 @@
+
+<div class="col-12 card shadow rounded-lg">
+
+    <div class="row p-4">
+        <div class="col">
+
+            <h5 class="large-heading mb-0 sustainment-blue">Market Research In Progress&nbsp;<i class="fa fa-fort-cog fa-spin icon" *ngIf="isLoading"></i></h5>
+            
+            <hr>
+
+            <div class="row panel-content">
+                <div class="col">
+
+
+                    <ng-container *ngIf="templateInstanceSummaries.length === 0">
+                        <div class="col-11 px-3 my-2 mb-4">
+                            <span>No Market Research in Progress</span>
+                        </div>
+                    </ng-container>
+        
+                    <div class="col-11 px-3 my-2 mb-4" *ngIf="isError">
+                        <span>Error loading Market Research</span>
+                    </div>
+
+
+
+                    <ng-container *ngIf="!isLoading && !isError">
+                        <ng-container *ngFor="let tempInsSum of templateInstanceSummaries">
+
+                                <div (click)="navToTemplateInstance(tempInsSum.id)" class="row my-3 temp-ins-sum ">
+                                    <!-- Template Instance Name -->
+                                    <h6 class="col-12 small-heading sustainment-blue mb-0">{{tempInsSum.title}}</h6> 
+
+                                    <div class="w-100 my-4 progress px-0 mx-3" style="height: 5px;">
+                                        <!-- Template Instance Progress -->
+                                        <div class="progress-bar" [style.width]="tempInsSum.progressComplete + '%'" style="height: 5px;"></div>
+                                    </div>
+
+                                </div>
+
+
+
+
+                        </ng-container>
+                    </ng-container>
+
+
+                   
+                    <div *ngIf="templateInstanceSummaries.length !== 0" class="col-12 mt-5 text-right">
+                        <a routerLink="/research" class="sustainment-blue d-inline-block see-all ">See All....</a>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        
+        
+        
+        </div>
+
+    </div>
+</div>
+        
+
+    

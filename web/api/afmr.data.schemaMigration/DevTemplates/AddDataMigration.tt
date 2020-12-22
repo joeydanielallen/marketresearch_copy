@@ -1,0 +1,80 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="Microsoft.VisualBasic.dll" #>
+<#@ assembly name="EnvDTE" #>
+<#@ import Namespace="System.IO" #>
+<#@ import namespace="EnvDTE" #>
+<#
+	var MigrationName = Microsoft.VisualBasic.Interaction.InputBox("Migration VerbNoun (e.g. AddTableField)", "T4 Template Generator");
+	if (string.IsNullOrWhiteSpace(MigrationName))
+		return null;
+
+	var MigrationVersion = System.DateTime.UtcNow.ToString("yyyyMMddHHmm");
+	var MigrationFileName = "M" + MigrationVersion + "_" + MigrationName;
+	var MigrationFullFileName = MigrationFileName + ".cs";
+	var TemplatePath = Directory.GetParent(Directory.GetParent(Host.TemplateFile).FullName).FullName;
+	var MigrationFilePath = Path.GetFullPath(Path.Combine(TemplatePath, "Migrations", MigrationFullFileName));
+#>
+using FluentMigrator;
+
+namespace <#=DefaultNamespace#>.Migrations
+{
+	[Migration(<#=MigrationVersion#>, TransactionBehavior.None)]
+	public class <#=MigrationFileName#> : Migration
+	{
+		public override void Up()
+		{
+			Insert.IntoTable("")
+				.Row(new { Id = 1, Name = "" })
+				.Row(new { Id = 2, Name = "" });
+		}
+
+		public override void Down()
+		{
+		}
+	}
+}
+<#
+SaveOutput(MigrationFilePath);
+IncludeInCurrentProject(MigrationFilePath)
+	.Open(Constants.vsViewKindPrimary)
+	.Activate();
+
+return null;
+#>
+<#+
+	private void SaveOutput(string filename, bool includeInProject = true)
+	{
+		if(string.IsNullOrWhiteSpace(filename)) return;
+
+		File.WriteAllText(filename, GenerationEnvironment.ToString());
+		GenerationEnvironment.Clear();
+	}
+
+	private ProjectItem IncludeInCurrentProject(string filename)
+	{
+		return CurrentProject.ProjectItems.AddFromFile(filename);
+	}
+
+	private Project CurrentProject
+	{
+		get {
+			if (_currentProject == null) {
+				var serviceProvider = (IServiceProvider)this.Host;
+				var dte = serviceProvider.GetService(typeof(DTE)) as DTE;
+				_currentProject = dte.Solution.FindProjectItem(Host.TemplateFile).ContainingProject;
+			}
+			return _currentProject;
+		}
+	}
+
+	private Project _currentProject;
+
+
+	private string DefaultNamespace
+	{
+		get {
+			return CurrentProject.Properties.Item("DefaultNamespace").Value.ToString();
+		}
+	}
+#>

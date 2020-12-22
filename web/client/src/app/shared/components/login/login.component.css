@@ -1,0 +1,28 @@
+
+input {
+    border-color: var(--machine-mist) !important;
+}
+
+input:focus {
+    outline: none;
+}
+
+ng-select {
+    outline: auto;
+}
+
+
+label.selected, .form-group:hover label {
+    color: var(--sustainment-blue) !important;
+}
+
+
+label.selected + input, .form-group:hover input {
+    border-color: var(--sustainment-blue) !important;
+}
+
+
+.copyright {
+    color: var(--light-gray);
+}
+

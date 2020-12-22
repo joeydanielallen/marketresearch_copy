@@ -1,0 +1,34 @@
+
+<header class="header">
+  <app-notify aria-live="polite" aria-atomic="true"></app-notify>
+  <app-top-nav></app-top-nav>
+</header>
+<div class="row body-row" [ngClass]="{'body-row': userLoggedIn, 'body-row-login': !userLoggedIn}">
+
+  <div class="poweredBy">
+    
+    <span style="margin-left: 25px">powered by</span>
+    <div>
+      <img src="../../../../assets/sustain-icon-white.png" width="30px"/>
+      <span>SUSTAINMENT</span>
+    </div>
+      
+  </div>
+
+  <app-side-nav style="background-color: var(--dark-gray);"></app-side-nav>
+  <div class="col container-col">
+    <div class="container-fluid" id="rootContainer">
+      <div style="margin: 2% 5%">
+        <router-outlet>
+              
+              <div class="card-container" *ngIf="isValidating">
+                <div class="container">
+                  Validating your login&nbsp;&nbsp;<i class="fa fa-fort-cog fa-spin" ></i>
+                </div>
+              </div>
+
+        </router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

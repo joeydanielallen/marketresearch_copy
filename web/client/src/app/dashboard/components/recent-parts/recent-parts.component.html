@@ -1,0 +1,47 @@
+
+<div class="col-12 card shadow rounded-lg">
+
+    <div class="overlay-div">
+        <div class="row align-middle mx-0">
+            <div class="col-12 text-center ">
+                <span style="font-size: 25px">Coming Soon ...</span>
+            </div>
+        </div>
+    </div> 
+
+
+
+    <div class="row p-4">
+        <div class="col">
+
+            <h5 class="large-heading mb-0 sustainment-blue">Recent Parts&nbsp;<i class="fa fa-fort-cog fa-spin icon" *ngIf="isLoading"></i></h5>
+            
+            <hr>
+
+            <div class="row panel-content">
+                <div class="col">
+
+                    <ng-container *ngIf="!isLoading && !hasLoadError">
+                        <ng-container *ngFor="let vendor of recents">
+                            <ng-container *ngIf="vendor.name">
+
+                                <div (click)="navVendDetail(vendor)" class="row mx-0 my-3 recent-vendor">
+                                    <h5 class="small-heading sustainment-blue text-uppercase">{{ vendor.name }}</h5> 
+                                </div>
+
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+
+
+                </div>
+
+            </div>
+
+        
+        
+        
+        </div>
+
+    </div>
+</div>

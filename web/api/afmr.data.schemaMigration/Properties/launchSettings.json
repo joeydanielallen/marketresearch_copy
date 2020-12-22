@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "afmr.data.schemaMigration": {
+      "commandName": "Project",
+      "commandLineArgs": "-ui"
+    }
+  }
+}

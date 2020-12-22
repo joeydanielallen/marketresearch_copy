@@ -1,0 +1,58 @@
+
+<div class="row justify-content-start">
+
+    <div class="card col-12 col-lg-11 shadow rounded-lg">
+
+        <div class="row justify-content-center">
+
+        
+            <div class="col-11 px-0">
+                <h5 class="large-heading px-3 py-3 mb-0">Market Research Info</h5> 
+            </div>
+
+            <hr class="col-11 m-0 ">
+
+            <div class="col-11 px-3 mb-0">
+                
+                <div class="row my-4">
+                    <h6 class="col-6 small-heading mb-0">Form Name</h6> 
+                    <h6 class="col-6 small-heading sustainment-blue open-sans capitalize text-right mb-0">{{getTemplateInstance().name}}</h6> 
+                </div>
+
+                <div class="row my-4">
+                    <h6 class="col-6 small-heading mb-0">NSN/ Part Number</h6> 
+                    <h6 class="col-6 small-heading sustainment-blue open-sans capitalize text-right mb-0">{{getTemplateInstance().nsn}}</h6> 
+                </div>
+
+                <ng-container *ngIf="getTemplateInstance().nsn.length === 15">
+                    <div class="row my-4">
+                        <h6 class="col-6 small-heading mb-0">MMAC Description</h6> 
+                        <h6 class="col-6 small-heading sustainment-blue open-sans capitalize text-right mb-0">{{getTemplateInstance().mmac}}</h6> 
+                    </div>
+                </ng-container>
+
+
+                <div class="row my-4">
+                    <h6 class="col-6 small-heading mb-0">Organization</h6>
+                    <h6 class="col-6 small-heading sustainment-blue open-sans capitalize text-right mb-0">{{getTemplateInstance().org.name}}</h6>
+                </div>
+
+                <div class="row my-4">
+                    <h6 class="col-6 small-heading mb-0">Started On</h6> 
+                    <h6 class="col-6 small-heading sustainment-blue open-sans capitalize text-right mb-0">{{getTemplateInstance().createdOn | date: 'M/d/yyyy'}}</h6> 
+                </div>
+
+                <div class="row my-4">
+                    <h6 class="col-6 small-heading mb-0">Time to Complete</h6> 
+                    <h6 class="col-6 small-heading sustainment-blue open-sans capitalize text-right mb-0">{{daysToComplete}} Days</h6> 
+                </div>
+
+            </div>
+
+        </div>
+                
+
+    </div>
+
+</div>
+

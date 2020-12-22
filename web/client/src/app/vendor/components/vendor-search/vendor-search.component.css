@@ -1,0 +1,326 @@
+.shadow {
+    box-shadow: 0.25rem 0.5rem 0.5rem rgba(0, 0, 0, 0.05) !important;
+}
+
+.sub-heading {
+    opacity: 0.65;
+}
+
+
+
+
+.vendor-search {
+    font-size: 20px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    height: 100%;
+    width: 90%;
+}
+
+.vendor-search::placeholder {
+    color: var(--sustainment-blue);
+}
+
+.vendor-search:focus {
+    outline: none;
+}
+
+
+
+.search-btn {
+    border-radius: 6px;
+}
+
+
+
+
+.vendor {
+    transform: scale(1);
+    transition: all 0.3s ease-in-out;
+    padding-top: 35px !important;
+    padding-bottom: 35px !important;
+}
+
+.vendor:hover {
+    cursor: pointer;
+    transform: scale(1.03);
+    transition: all 0.3s ease-in-out;
+}
+
+
+
+
+.card {
+    flex-direction: row;
+}
+
+
+
+
+.filter-button, .filter-button-selected {
+   
+    text-align: center;
+    font-size: 16px;
+    color: #53565A;
+    background-color: rgba(203, 201, 199, 0.25);
+    border-radius: 0%;
+    border: 0;
+}
+
+.filter-button-selected {
+    color: white;
+    background-color: #66798E;
+}
+
+
+
+
+.left-page-arrow, .right-page-arrow {
+    font-size: 20px;
+}
+
+.left-page-arrow:hover, .right-page-arrow:hover, .current-page-number:hover, .other-page-number:hover {
+    cursor: pointer;
+}
+
+
+
+.left-page-arrow:hover {
+    transform: scale(-1.5, 1.5);
+    transition: all 0.3s ease-in-out;
+}
+
+.right-page-arrow:hover {
+    transform: scale(1.5);
+    transition: all 0.3s ease-in-out;
+    
+}
+
+
+
+
+
+.current-page-number {
+    color: var(--black);
+}
+
+.other-page-number {
+    color: var(--light-gray);
+}
+
+
+
+.square-profile-pic {
+    border: solid 2px gray;
+    border-radius: 10%;
+    width: 15%;
+}
+
+
+.square-profile-pic:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
+
+
+
+.square-profile-pic-break {
+    border: solid 2px gray;
+    border-radius: 10%;
+    width: 10%;
+}
+
+
+.square-profile-pic-break:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
+
+
+.overlay-div {
+    margin-left: -16px;
+    margin-top: -15px;
+}
+
+.overlay-div div.row {
+    margin-top: 200px;
+}
+
+
+
+
+
+
+
+/* Custom Checkbox Icon */
+.checkbox-label {
+    display: inline-block;
+    position: relative;
+    margin: 0px;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 24px;
+    height: 24px;
+    width: 24px;
+    clear: both;
+}
+
+.checkbox-label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkbox-label .checkbox-custom {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 24px;
+    width: 24px;
+    background-color: transparent;
+    border-radius: 10%;
+    transition: all 0.3s ease-out;
+    border: 2px solid var(--light-gray);
+}
+
+
+.checkbox-label input:checked ~ .checkbox-custom {
+    background-color: var(--sustainment-blue);
+    border-radius: 10%;
+    transform: scale(1);
+    opacity:1;
+    border: 2px solid var(--sustainment-blue);
+}
+
+
+.checkbox-label .checkbox-custom::after {
+    position: absolute;
+    content: "";
+    left: 12px;
+    top: 12px;
+    height: 0px;
+    width: 0px;
+    border-radius: 5px;
+    border: solid white;
+    border-width: 0 3px 3px 0; 
+    transform: rotate(45deg) scale(0);
+    opacity:1;
+    transition: all 0.3s ease-out;
+}
+
+
+.checkbox-label input:checked ~ .checkbox-custom::after {
+    transform: rotate(45deg) scale(1);
+    opacity:1;
+    left: 8px;
+    top: 3px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0; 
+    background-color: transparent;
+    border-radius: 0;
+}
+
+
+
+
+.search-filter {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    height: 100%;
+    width: 90%;
+}
+
+
+.search-filter::placeholder {
+    opacity: 0.5;
+}
+
+
+.overlay-div {
+    top: 14px;
+    left: 16px;
+}
+
+
+/* Removes box shadow on focus/toggle */
+.custom-control-input:focus~.custom-control-label::before {
+    border: 0;
+    box-shadow: none !important;
+}
+
+
+/* 
+Horizontal Toggle Container
+width: height => 1px: 1.75px 
+*/
+.custom-control-label::before {
+    width: 35px;
+    height: 15px;
+    border-radius: 10px;
+    top: 2px;
+    left: -41px;
+    border-color: var(--sustainment-blue) !important;
+    background-color: var(--sustainment-blue) !important;
+    opacity: 0.7;
+}
+
+
+/* 
+Toggle Button
+width: height => 1px: 1px 
+*/
+.custom-control-label::after {
+    width: 20px;
+    height: 20px;
+    border-radius: 13px;
+    left: -42px;
+    top: -1px;
+    border-color: var(--sustainment-blue) !important;
+    background-color: var(--sustainment-blue) !important;
+    box-shadow: 1px 1px 2px var(--gray);
+}
+
+/* This controls the horizontal movement for the Toggle Button */
+.custom-switch .custom-control-input:checked ~ .custom-control-label::after {
+    transform: translateX(1rem);
+}
+
+
+.custom-control-label {
+    font-size: 20px;
+}
+
+
+
+button.col-3 {
+    max-width: 24% !important;
+}
+
+
+
+
+.validating {
+    color: var(--light-gray);
+}
+
+
+.valid {
+    color: rgb(48, 177, 228);
+}
+
+.not-valid {
+    color: rgb(243, 128, 20);
+}
+
+
+
+
+

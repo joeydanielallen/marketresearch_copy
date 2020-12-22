@@ -1,0 +1,45 @@
+
+#sidebar-container {
+    min-width:100px;
+}
+
+.container-row {
+    min-height: 95%;
+    min-width:100px;
+}
+
+
+
+
+div.navLink:hover {
+    background-color: rgb(66, 66, 66);
+    /* cursor: pointer; */
+}
+
+div.navLink:focus {
+    outline: 0;
+}
+
+
+
+hr {
+    visibility: hidden;
+    border-color: rgba(255, 255, 255, 0);
+    border-width: 2px;
+    width: 35px;
+    position: absolute;
+    left: 33px;
+    top: 33px;
+    margin: 0;
+    /* transform: rotate(); */
+    transition: all 0.5s ease-in-out;
+    
+}
+
+div.navLink:hover hr {  
+    visibility: visible; 
+    border-color: rgba(255, 255, 255, 0.637);
+    
+    transform: rotate(45deg);
+    transition: all 0.5s ease-in-out;
+}

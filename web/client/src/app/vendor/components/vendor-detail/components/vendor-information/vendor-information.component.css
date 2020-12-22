@@ -1,0 +1,33 @@
+
+
+.vendor-picture {
+    height: 205px;
+}
+
+.vendor-picture:hover {
+    background-color: #73969A !important;
+}
+
+.panel-content {
+    height: 250px;
+    padding-right: 30px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 7px;
+    background-color: rgba(0, 0, 0, 0.15);
+    border: 0;
+}
+
+.card-header {
+    background-color: var(--sustainment-blue);
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}

@@ -1,0 +1,183 @@
+
+
+<nav class="navbar navbar-light navbar-expand-xl" *ngIf="userIsLoggedIn">
+
+
+
+    <!-- Company/ Org Logo -->
+    <a class="navbar-brand" href="#" routerLink="dashboard" data-toggle="collapse" data-target="#navbarNavDropdown.show">
+        <img
+        *ngIf="!isLoginPage()"
+        class="d-inline-block "
+        width="60"
+        alt="448th SCMW"
+        title="448th SCMW Market Research Dashboard"
+        src="assets/448SCMW_logo.png"/>
+
+        <img
+        *ngIf="isLoginPage()"
+        class="d-inline-block align-top"
+        width="60"
+        alt="Sustainment Logo"
+        title="Sustainment Logo"
+        src="assets/sustain-icon-white.png"/>
+    </a>
+
+
+
+
+
+    <!-- Hamburger Icon -->
+    <button 
+        *ngIf="!isLoginPage()"
+        class="navbar-toggler navbar-toggler-right mr-3" 
+        type="button" 
+        data-toggle="collapse" 
+        data-target="#navbarNavDropdown" 
+        aria-controls="navbarNavDropdown" 
+        aria-expanded="false" 
+        aria-label="Toggle navigation"
+        >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+  
+
+
+
+  <!-- Navbar links and New links for mobile view -->
+  <div class="collapse navbar-collapse justify-content-between w-100" id="navbarNavDropdown">
+      <ul class="navbar-nav" *ngIf="userIsLoggedIn">
+        <li class="nav-item">
+            <a class="nav-link sustainment-blue small-heading" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#" title="Main Dashboard" routerLinkActive="active" routerLink="./dashboard">Dashboard</a>
+        </li>   
+          <li class="nav-item active" *ngIf="hasClaim(5)">
+              <a class="nav-link sustainment-blue small-heading text-nowrap" data-toggle="collapse" data-target="#navbarNavDropdown.show" routerLinkActive="active"
+              href="#" title="Initiate and Manage Market Research" routerLink="./research">Market Research</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link sustainment-blue small-heading" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#" title="Search Vendors" routerLinkActive="active" routerLink="./vendor/search">Vendors</a>
+          </li>
+          <li class="nav-item">
+              <a disabled class="nav-link sustainment-blue small-heading" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#" title="Search Parts" routerLinkActive="active">Parts</a>
+          </li>
+          <li class="nav-item">
+              <a disabled class="nav-link sustainment-blue small-heading" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#" title="Manage Strategies" routerLinkActive="active">Strategies</a>
+          </li>
+          <!-- <li class="nav-item">
+              <a disabled class="nav-link sustainment-blue small-heading text-nowrap" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#" title="Manage Data Sources" routerLinkActive="active">Data Sources</a>
+          </li> -->
+          <li class="nav-item">
+            <a disabled class="nav-link sustainment-blue small-heading" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#" title="Search" routerLinkActive="active">Search</a>
+            </li>
+          <li class="nav-item dropdown d-none d-md-block" *ngIf="hasAnyClaim([8,9,10,11])">
+              <a class="nav-link sustainment-blue small-heading dropdown-toggle" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" routerLinkActive="active">Admin</a>
+              <div class="dropdown-menu" aria-labelledby="adminDropdown">
+                <a class="dropdown-item sustainment-blue" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#" *ngIf="hasClaim(8)">Users</a>
+                <a class="dropdown-item sustainment-blue" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#" *ngIf="hasClaim(9)">Roles</a>
+                <a class="dropdown-item sustainment-blue" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#" *ngIf="hasClaim(12)">Organizations</a>
+                <a class="dropdown-item sustainment-blue" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#" *ngIf="hasClaim(10)">Form Templates</a>
+                <a class="dropdown-item sustainment-blue" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#" *ngIf="hasClaim(10)">Template Sections</a>
+                <a class="dropdown-item sustainment-blue" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#" *ngIf="hasClaim(10)">Section Questions</a>
+                <a class="dropdown-item sustainment-blue" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#" *ngIf="hasClaim(11)">Configurations</a>
+              </div>
+          </li>
+          <li class="nav-item d-block d-md-none">
+              <a disabled class="nav-link sustainment-blue small-heading" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#" routerLink="bookmark">Bookmark</a>
+          </li>
+          <li class="nav-item d-block d-md-none">
+              <a disabled class="nav-link sustainment-blue small-heading" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#" routerLink="library">Library</a>
+          </li>
+          <li class="nav-item d-block d-md-none">
+              <a disabled class="nav-link sustainment-blue small-heading" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#" routerLink="analytics">Analytics</a>
+          </li>
+          <li class="nav-item d-block d-md-none" *ngIf="hasClaim(8)">
+              <a class="nav-link sustainment-blue small-heading" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#">Admin Users</a>
+          </li>
+          <li class="nav-item d-block d-md-none" *ngIf="hasClaim(9)">
+              <a class="nav-link sustainment-blue small-heading" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#">Admin Roles</a>
+          </li>
+          <li class="nav-item d-block d-md-none" *ngIf="hasClaim(12)">
+              <a class="nav-link sustainment-blue small-heading" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#">Admin Organizations</a>
+          </li>
+          <li class="nav-item d-block d-md-none" *ngIf="hasClaim(10)">
+              <a class="nav-link sustainment-blue small-heading" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#">Admin Form Templates</a>
+          </li>
+          <li class="nav-item d-block d-md-none" *ngIf="hasClaim(10)">
+              <a class="nav-link sustainment-blue small-heading" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#">Admin Template Sections</a>
+          </li>
+          <li class="nav-item d-block d-md-none" *ngIf="hasClaim(10)">
+              <a class="nav-link sustainment-blue small-heading" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#">Admin Section Questions</a>
+          </li>
+          <li class="nav-item d-block d-md-none" *ngIf="hasClaim(11)">
+              <a class="nav-link sustainment-blue small-heading" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#">Admin Configurations</a>
+          </li>
+          <li class="nav-item d-block d-md-none">
+              <a disabled class="nav-link sustainment-blue small-heading" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#" routerLink="message">Messages</a>
+          </li>
+          <li class="nav-item d-block d-md-none">
+              <a disabled class="nav-link sustainment-blue small-heading" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="#" routerLink="profile">Profile</a>
+          </li>
+          <li class="nav-item d-block d-md-none">
+              <a class="nav-link sustainment-blue small-heading" data-toggle="collapse" data-target="#navbarNavDropdown.show" href="javascript:void(0);" (click)="logout()">Logout</a>
+          </li>
+        </ul>
+
+
+        <!-- Profile pic and notification -->
+        
+        <div class="col">
+            <div class="row justify-content-end">
+
+                <div class="profile-pic-container ">
+                    <span class="rounded-circle"><p class="initials size-16">{{getUserInitials()}}</p></span>
+                </div>
+
+
+                
+                <div style="position: relative;" class="navbar-text order-1 order-last item-badge mr-3 ml-0 d-none d-md-block " *ngIf="userIsLoggedIn">
+                    
+                    <!-- Use this when we have profile pictures vvv -->
+                    <!-- <img title="{{userName}}" src="https://www.fillmurray.com/50/50" class="rounded-circle" alt="{{userName}}"> -->
+
+                    <!-- <a href="#" routerLink="message"> -->
+                    <a style="position: relative;" routerLink="#">
+                        <span class="badge badge-danger one-digit" title="Messages">9</span>
+
+                        <!-- Add NgIf for notification count > 9 or > 99 display different versions, different css -->
+                        <!-- <span class="badge badge-danger two-digit" title="Messages">99</span> -->
+                        <!-- <span class="badge badge-danger three-digit" title="Messages">99+</span> -->
+                    </a>
+
+                    <i class="fa fa-fort-keyboard-arrow-down fa-2x dropdown-arrow mt-2" id="profileDropdown" role="button" data-toggle="dropdown" 
+                    aria-haspopup="true" aria-expanded="false"></i>
+                    
+
+
+
+
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labeledby="profileDropdown">
+                        <button disabled="true" class="dropdown-item" routerLink="message">Messages</button>
+                        <button disabled="true" class="dropdown-item" routerLink="profile">Profile</button>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="javascript:void(0);" (click)="logout()">Logout</a>
+                    </div>
+                    
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+  </div>
+</nav>

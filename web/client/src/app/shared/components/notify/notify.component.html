@@ -1,0 +1,14 @@
+<ngb-toast
+    *ngFor="let toast of notifyService.toasts"
+    [class]="(toast.options.classname || 'bg-success') + ' text-light'"
+    [autohide]="toast.options.autohide || true"
+    [delay]="toast.options.delay || 4000"
+    (hide)="removeToast(toast)"
+    (click)="removeToast(toast)"
+>
+    <ng-template [ngIf]="isTemplate(toast)" [ngIfElse]="text">
+    <ng-template [ngTemplateOutlet]="toast.textOrTpl"></ng-template>
+    </ng-template>
+
+    <ng-template #text>{{ toast.textOrTpl }}</ng-template>
+</ngb-toast>

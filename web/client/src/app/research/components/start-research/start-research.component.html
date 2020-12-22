@@ -1,0 +1,480 @@
+
+
+<div class="row mb-4 justify-content-between">
+    <div class="col-8 px-0">
+        <h5 class="large-heading">Initiate Research Results</h5>
+        <h6 class="small-heading light-gray">Results of Initiate Search</h6>
+    </div>
+
+    <div class="d-flex justify-content-end">
+        <button (click)="toggleShowInitiate()" *ngIf="hasClaim(6) && !showInitiate" class="btn btn-lg secondary">Show Re-Initiate</button>
+        <button (click)="toggleShowInitiate()" *ngIf="hasClaim(6) && showInitiate" class="btn btn-lg clear">Hide Re-Initiate</button>
+    </div>
+</div>
+
+<!-- Initiate Research Component -->
+<div *ngIf="hasClaim(6) && showInitiate">   
+    <app-initiate-research (initiated)="onInitiate($event)" [isDisabled]="isReinitiating" [initialInitiateModel]="initiateModel"></app-initiate-research> 
+</div>
+
+
+
+<div class="row justify-content-around mt-1">
+    
+    <div class="col-12 card shadow">
+        
+        <div class="row card-body justify-content-around text-center">
+
+            <div *ngIf="!dataLoaded" class=" px-0">
+                <i class="fa fa-fort-cog fa-spin icon "></i>
+            </div>
+
+            <div class="col-3 px-0">
+                <span class="row-column-header bold">NSN: </span>
+                <span>{{results.initiateSummary.nsn}}</span>
+            </div>
+            
+            <div class="col-2 px-0">
+                <span class="row-column-header bold">Estimate Value: $</span>
+                <span>{{results.initiateSummary.estimatedValue}}</span>
+            </div>
+
+            <div class="col-2 px-0">
+                <span class="row-column-header bold">Service: </span>
+                <span>{{results.initiateSummary.serviceTypeName}}</span>
+            </div>
+
+            <div class="col-2 px-0">
+                <span class="row-column-header bold">Source: </span>
+                <span>{{results.initiateSummary.sourceTypeName}}</span>
+            </div>
+            
+        </div>
+    </div>
+
+</div>
+
+
+
+<!-- Only tries to display everything, if something comes back from the server -->
+<ng-container *ngIf="dataLoaded">
+
+    <div *ngIf="partOwnerCount > 0" class="row mt-5">
+        <span class="small-heading m-0">Part Owners:</span>
+        <hr class="col-12 my-1">
+    </div>
+
+
+        <!-- Possbile Vendors Column Headers -->
+    <div *ngIf="partOwnerCount > 0" class="row">
+        <div class="col-12">
+            <div class="row mt-4">
+                <div class="col-12 ">
+                    <div class="row align-items-center text-center justify-content-around">
+                        <span class="col-3 column-header">PART NUMBER</span>
+                        <span class="col-4 column-header">NAME</span>
+                        <span class="col-3 column-header">CAGE CODE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Display of Possible Vendors -->
+    <div class="row">
+        <div class="col-12">
+            <div *ngFor="let award of results.awards"> 
+                <div class="row card shadow mb-3 py-2">
+                    <div class="card-body col-12 ">
+                        <div class="row align-items-center text-center justify-content-around">
+                            <span class="col-3">{{award.partNumber}}</span>
+                            <span class="col-4">{{award.vendor.name}}</span>
+                            <span class="col-3">{{award.vendor.cageCode}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- High Level Results of Possible Vendors and Prior Market Research -->
+    <div class="row section">
+
+        <!-- Left Half -->
+        <div class="col-6 px-0">
+            <div class="row">
+                <div class="col-11">
+
+                    <h4 class="card-heading">POSSIBLE VENDORS</h4>
+
+                    <div class="card shadow">
+                        <div class="card-body">
+
+                            <div class="row justify-content-center mt-1">
+                                <!-- If the call has finished/exited and there wasn't an error -->
+                                <span *ngIf="!vendorDataLoaded && !vendorSearchLoaded" class="card-heading">Searching Possible Vendors &nbsp;<i class="fa fa-fort-cog fa-spin icon "></i></span>
+                               
+                                <!-- If the call has finished/exited and there was an error -->
+                                <span *ngIf="!vendorDataLoaded && vendorSearchLoaded" class="card-heading">Error with Possible Vendors</span>
+
+                                <!-- If the call has succeeded -->
+                                <span *ngIf="vendorDataLoaded" class="card-heading">{{vendorCount}} Possible Vendors Found</span>
+                            </div>
+
+                            <div class="row justify-content-center my-1">
+                                <div class="col-7 col-xl-6"> 
+                                    <button 
+                                        [disabled]="vendorCount === 0 || !vendorDataLoaded" 
+                                        (click)="toggleVendors()" 
+                                        type="button"  
+                                        class="btn secondary btn-lg w-100"
+                                        [ngClass]="{'secondary': !showVendors, 'secondary-showing': showVendors && vendorCount > 0}">
+                                        <span class="white" *ngIf="!showVendors && vendorCount > 0">View Vendors</span>
+                                        <span *ngIf="showVendors && vendorCount > 0">Hide Vendors</span>
+                                        <span *ngIf="vendorCount === 0">No Vendors</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Right Half -->
+        <div class="col-6 px-0">
+            <div class="row justify-content-end">
+                <div class="col-11">
+
+                    <h4 class="card-heading">PRIOR MARKET RESEARCH</h4>
+
+                    <div class="card shadow">
+                        <div class="card-body">
+
+                            <div class="row justify-content-center mt-1">
+                                <span class="card-heading">{{priorResearchCount}} Prior Research Found</span>
+                            </div>
+
+                            <div class="row justify-content-center my-1">
+                                <div class="col-8 col-xl-6">
+                                    <button 
+                                        [disabled]="priorResearchCount === 0"
+                                        (click)="togglePriorResearch()"
+                                        type="button" 
+                                        class="btn secondary btn-lg w-100"
+                                        [ngClass]="{'secondary': !showPriorResearch, 'secondary-showing': showPriorResearch && priorResearchCount > 0}">
+                                        <span class="white" *ngIf="!showPriorResearch && priorResearchCount > 0">View Research</span>
+                                        <span *ngIf="showPriorResearch && priorResearchCount > 0">Hide Research</span>
+                                        <span *ngIf="priorResearchCount === 0">No Research</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-end mt-5">
+        <div class="col-12 px-0 text-right">
+
+            <ng-container *ngIf="pageNumberArray.length > 1 && showVendors">
+                <i (click)="firstPage()" class="fa fa-fort-angles-right fa-flip-horizontal fa-2x left-page-arrow"></i>
+                <i (click)="previousPage()" class="fa fa-fort-angle-right fa-flip-horizontal left-page-arrow mx-3"></i>
+            </ng-container>
+            
+            <ng-container *ngIf="showVendors">
+                <ng-container *ngFor="let pageNumber of pageNumberArray">
+                    <span (click)="jumpToPage(pageNumber + 1)" [ngClass]="{'current-page-number': pageNumber + 1 === currentPage, 'other-page-number': pageNumber + 1 !== currentPage}" class="mx-2 size-24">{{pageNumber + 1}}</span>
+                </ng-container>
+            </ng-container>
+
+    
+            <ng-container *ngIf="pageNumberArray.length > 1 && showVendors">
+                <i (click)="nextPage()" class="fa fa-fort-angle-right mx-3 right-page-arrow"></i>
+                <i (click)="lastPage()" class="fa fa-fort-angles-right right-page-arrow"></i>
+            </ng-container>
+    
+        </div>
+    </div>
+               
+    <div class="row ">
+        <div class="col-12 px-0">
+            
+            <ng-container *ngIf="showVendors">
+
+                <div *ngIf="allSearchResults.length > 0" class="row p-4 justify-content-between text-center">
+        
+                    <span class="col-3 small-heading">Name</span>        
+                    <span class="col-2 small-heading">Location</span>                
+                    <span class="col-2 small-heading">Cage Code</span>        
+                    <span class="col-2 small-heading">Duns ID</span>
+        
+                </div>        
+        
+                <ng-container *ngFor="let result of currentPageResults">  
+
+                    <!-- Vendor that has an Id -->
+                    <ng-container *ngIf="result.researchVendorId || result.sustainmentVendorId">
+                        
+                        <div 
+                            style="flex-direction: row !important;" 
+                            (click)="navVendDetail(result)"
+                            class="row mx-0 card p-4 mb-3 vendor justify-content-between text-center align-items-center">
+                
+                            <span *ngIf="!result.name" class="col-3 px-0">N/A</span>
+                            <span class="col-3 px-0">{{result.name}}</span>
+        
+                            <span *ngIf="!result.city" class="col-2 px-0">N/A</span>
+                            <span *ngIf="result.city" class="col-2 px-0">{{result.city}}, {{result.stateAbbreviation}} {{result.postalCode}}</span>
+                
+                            <span *ngIf="result.cageCode.length < 2" class="col-2 px-0">N/A</span>
+                            <span *ngIf="result.cageCode.length > 2" class="col-2 px-0">{{result.cageCode}}</span>
+                
+                            <span *ngIf="!result.dunsId" class="col-2 px-0">N/A</span>
+                            <span class="col-2 px-0">{{result.dunsId}}</span>        
+        
+                        </div>
+        
+                    </ng-container>
+
+                    <!-- Vendor that doesn't have an id -->
+                    <ng-container *ngIf="!result.researchVendorId && !result.sustainmentVendorId">
+    
+                        <div 
+                            style="flex-direction: row !important;" 
+                            class="row mx-0 card p-4 mb-3 justify-content-between text-center align-items-center">
+                
+                            <span *ngIf="!result.name" class="col-3 px-0">N/A</span>
+                            <span class="col-3 px-0">{{result.name}}</span>
+        
+                            <span *ngIf="!result.city" class="col-2 px-0">N/A</span>
+                            <span *ngIf="result.city" class="col-2 px-0">{{result.city}}, {{result.stateAbbreviation}} {{result.postalCode}}</span>
+                                
+                            <span *ngIf="result.cageCode.length < 2" class="col-2 px-0">N/A</span>
+                            <span *ngIf="result.cageCode.length > 2" class="col-2 px-0">{{result.cageCode}}</span>
+                
+                            <span *ngIf="!result.dunsId" class="col-2 px-0">N/A</span>
+                            <span class="col-2 px-0">{{result.dunsId}}</span>        
+        
+                        </div>
+        
+                    </ng-container>
+        
+                </ng-container>
+
+            </ng-container>
+    
+        </div>
+    </div>
+
+    <!-- Prior Market Research Column Headers -->
+    <div *ngIf="showPriorResearch && priorResearchCount > 0" class="row p-4 justify-content-between text-center">
+
+        <span class="col-2 column-header">DATE COMPLETED</span>
+        <span class="col-2 column-header">NAME</span>
+        <span class="col-2 column-header">BID TYPE</span>
+        <span class="col-2 column-header">ORGANIZATION</span>
+                    
+    </div>
+
+    <!-- Display of Prior Market Research -->
+    <div *ngIf="showPriorResearch" class="row">
+        <div class="col-12">
+            <div *ngFor="let research of results.priorResearchSummaries"> 
+                <div 
+                    style="flex-direction: row !important;" 
+                    (click)="navToResearchDetail(research)"
+                    class="row mx-0 card p-4 mb-3 vendor justify-content-between text-center align-items-center">
+        
+                    <span class="col-3 px-0">{{research.completionDate | date:'M/d/yyyy'}}</span>
+                    <span class="col-2 px-0">{{research.templateName}}</span>        
+                    <span class="col-2 px-0">{{research.bidTypeName}}</span>
+                    <span class="col-2 px-0">{{research.orgName}}</span>        
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Suggested and Remaining Templates Section -->
+    <div class="section row">
+
+        <!-- Suggested Templates -->
+        <div class="suggested mb-5 col-12">
+
+            <div class="row mb-1">
+                <div class="col-12">
+                    <h4 class="card-heading">TEMPLATES</h4>
+                </div>
+            </div>
+            
+            <div *ngIf="results.proposedTemplates.length > 0">
+
+                <!-- Suggested Templates Column Headers -->
+                <div class="row">
+                    <div class="col-12 ">
+                        <div class="row">
+                            <div class="col-12 ">
+                                <div class="row align-items-center text-center justify-content-around">
+                                    <div class="col-1"></div>
+                                    <span class="col-3 column-header">NAME</span>
+                                    <span class="col-2 column-header">ORGANIZATION</span>
+                                    <span class="col-2 column-header">BID TYPE</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Display of Suggested Templates -->
+                <div class="row">
+                    <div class="col-12">
+                        <div *ngFor="let template of results.proposedTemplates"> 
+                            <div class="row card shadow mb-3 py-2">
+                                <div class="card-body col-12 ">
+                                    <div class="row align-items-center text-center justify-content-around">
+
+                                        <input class="col-1 primary" [(ngModel)]="selectedTemplate" (ngModelChange)="showFeedbackModal = false" id="{{template.name}}" [value]="template" name='templates' type="radio" >
+                                    
+                                        <span class="col-3">{{template.name}}</span>
+                                        <span class="col-2">{{template.orgName}}</span>
+                                        <span class="col-2">{{template.bidTypeName}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div *ngFor="let template of results.remainingTemplates"> 
+                            <div class="row card shadow mb-3 py-2">
+                                <div class="card-body col-12">
+                                    <div class="row align-items-center text-center justify-content-around">
+
+                                        <input class="col-1 primary" [(ngModel)]="selectedTemplate" (ngModelChange)="showFeedbackModal = true"  id="{{template.name}}" [value]="template" name='templates' type="radio" >
+                                        
+                                        <span class="col-3">{{template.name}}</span>
+                                        <span class="col-2">{{template.orgName}}</span>
+                                        <span class="col-2">{{template.bidTypeName}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+
+            </div>
+
+            <!-- Message to user of Null result -->
+            <div *ngIf="results.proposedTemplates.length === 0">
+                <h4 class="card-heading">No suggested templates</h4>
+            </div>
+
+        </div>
+
+        <!-- Remaining Templates -->
+        <!-- <div class="remaining col-12">
+
+            <div class="row justify-content-end">
+                <div class="col-12">
+
+                
+                    <div class="row mb-1">
+                        <div class="col-12">
+                            <h4 class="card-heading">REMAINING TEMPLATES</h4>
+                        </div>
+                    </div>
+                    
+                    <div *ngIf="results.remainingTemplates.length > 0"> -->
+
+                        <!-- Remaining Templates Column Headers -->
+                        <!-- <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12 ">
+                                        <div class="row align-items-center text-center justify-content-around">
+                                            <div class="col-1"></div>
+                                            <span class="col-3 column-header">NAME</span>
+                                            <span class="col-2 column-header">ORGANIZATION</span>
+                                            <span class="col-2 column-header">BID TYPE</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <!-- Display of Remaining Templates -->
+                        <!-- <div class="row">
+                            <div class="col-12">
+                                <div *ngFor="let template of results.remainingTemplates"> 
+                                    <div class="row card shadow mb-3 py-2">
+                                        <div class="card-body col-12">
+                                            <div class="row align-items-center text-center justify-content-around">
+
+                                                <input class="col-1 primary" [(ngModel)]="selectedTemplate" (ngModelChange)="showFeedbackModal = true"  id="{{template.name}}" [value]="template" name='templates' type="radio" >
+                                                
+                                                <span class="col-3">{{template.name}}</span>
+                                                <span class="col-2">{{template.orgName}}</span>
+                                                <span class="col-2">{{template.bidTypeName}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- Message to user of Null results -->
+                    <!-- <div *ngIf="results.remainingTemplates.length === 0">
+                        <h4 class="card-heading">No Remaining Templates</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+         -->
+
+    </div>
+
+    <div class="row">
+
+        <!-- if user doesn't select suggested template, need to know why -->
+        <div class="col-7">
+            <div *ngIf="showFeedbackModal" class="row mt-4">
+                <span class="col-12">Please let us know how we can improve the recommendation algorithm: </span>
+                <textarea [(ngModel)]="feedback" style="min-height: 200px;" class="col-12 p-2"></textarea>
+            </div>
+        </div>
+
+        <!-- Start Research Button -->
+        <div class="col-5">
+            <div class="row justify-content-end mt-4">
+                <button 
+                    (click)="check_start_reqs()" 
+                    [disabled]="!srButtonActive" 
+                    [ngClass]="{'secondary': srButtonActive}" 
+                    class="col-6 btn btn-lg secondary py-3"
+                    > Start Research </button>
+            </div>
+        </div>
+
+    </div>
+
+</ng-container>
+
+<!-- Messages for different permutations of the response -->
+<div *ngIf="results.searchQueueResponse?.processStatusDescription === 'Processing'" ><span>{{results.searchQueueResponse.processMessage}} in Data Source APIs</span><i class="fa fa-fort-cog fa-spin icon ml-2"></i></div>
+<div *ngIf="results.searchQueueResponse?.processStatusDescription === 'CompleteNoData'" ><span>{{results.searchQueueResponse.processMessage}}</span></div>
+<div *ngIf="results.searchQueueResponse?.processStatusDescription === 'Error'" ><span>{{results.searchQueueResponse.processMessage}}</span></div>
+    
+

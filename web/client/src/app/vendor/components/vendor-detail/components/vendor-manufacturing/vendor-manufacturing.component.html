@@ -1,0 +1,118 @@
+
+<!-- Manufacturing Panel -->
+<div class="col-12 card shadow px-0">
+
+
+    <!-- Heading -->
+    <div class="card-header p-4 px-5">
+        <span class="large-heading">Manufacturing Capabilities</span>
+
+        <!-- Loading Spinner -->
+        <div *ngIf="susDataLoading" class="d-inline ml-2">
+            <i style="font-size: 24px;" class="fa fa-fort-cog fa-spin"></i>
+        </div>
+
+    </div>
+
+
+
+
+    <div class="row mx-0">
+        <div class="col px-0">
+
+            
+            <!-- Fields -->
+            <ng-container *ngIf="!susDataLoading">
+
+                <div class="row mx-0 panel-content">
+                    <div class="col px-0">
+
+                        <!-- Materials -->
+                        <div class="row py-3 px-5 mt-3 mx-0 justify-content-between">
+
+                            <div class="col px-0">
+                                <span class="mr-3 text-uppercase">Materials</span>
+                            </div>
+
+                            <div class="col px-0 text-right">
+
+                                <ng-container *ngIf="susVendorManufacturing.materials && susVendorManufacturing.materials.length > 0">
+                                    <ng-container *ngFor="let material of susVendorManufacturing.materials">
+                                        <span class="text-uppercase d-block">{{material}}</span>
+                                    </ng-container>
+                                </ng-container>
+
+                                <span *ngIf="!susVendorManufacturing.materials || susVendorManufacturing.materials.length === 0">N/A</span>
+
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <!-- Tolerances -->
+                        <div class="row py-3 px-5 mt-3 mx-0 justify-content-between">
+
+                            <div class="col px-0">
+                                <span class="mr-3 text-uppercase">Tolerances</span>
+                            </div>
+
+                            <div class="col px-0 text-right">
+
+                                <ng-container *ngIf="susVendorManufacturing.tolerances && susVendorManufacturing.tolerances.length > 0">
+                                    <ng-container *ngFor="let tolerance of susVendorManufacturing.tolerances">
+                                        <span class="d-block">{{tolerance}}</span>
+                                    </ng-container>
+                                </ng-container>
+
+                                <span *ngIf="!susVendorManufacturing.tolerances || susVendorManufacturing.tolerances.length === 0">N/A</span>
+                           
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <!-- Engines -->
+                        <div class="row py-3 px-5 mt-3 mx-0 justify-content-between">
+
+                            <div class="col px-0">
+                                <span class="mr-3 text-uppercase">Engines</span>
+                            </div>
+
+                            <div class="col px-0 text-right">
+                                <span class="text-uppercase" *ngIf="susVendorManufacturing.engines !== null">{{susVendorManufacturing.engines ? 'Yes' : 'No'}}</span>
+                                <span *ngIf="susVendorManufacturing.engines === null">N/A</span>
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <!-- First Year -->
+                        <div class="row py-3 px-5 mt-3 mx-0 justify-content-between">
+
+                            <div class="col px-0">
+                                <span class="mr-3 text-uppercase">First Year</span>
+                            </div>
+
+                            <div class="col px-0 text-right">
+                                <span *ngIf="susVendorManufacturing.first_year !== null">{{susVendorManufacturing.first_year}}</span>
+                                <span *ngIf="susVendorManufacturing.first_year === null">N/A</span>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+            </ng-container>
+
+
+
+        </div>
+    </div>
+</div>
+

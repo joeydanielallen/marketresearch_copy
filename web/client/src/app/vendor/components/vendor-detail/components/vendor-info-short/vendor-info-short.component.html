@@ -1,0 +1,96 @@
+
+<!-- Business Info Panel -->
+<div class="col-12 card shadow px-0">
+
+    <!-- Heading -->
+    <div class="card-header p-4 px-5">
+        <span class="large-heading">Business Info</span>
+
+        <!-- Loading Spinner -->
+        <div *ngIf="susDataLoading" class="d-inline ml-2">
+            <i style="font-size: 24px;" class="fa fa-fort-cog fa-spin"></i>
+        </div>
+
+    </div>
+
+    <div class="row mx-0">
+        <div class="col px-0">
+            
+            <!-- Fields -->
+            <ng-container *ngIf="!susDataLoading">
+
+                <div class="row mx-0 panel-content">
+                    <div class="col px-0">
+
+                        <!-- Employees -->
+                        <div class="row py-3 px-5 mt-3 mx-0 justify-content-between">
+                            <div class="col px-0">
+                                <span class="mr-3 text-uppercase">Employees</span>
+                                
+                            </div>
+
+                            <div class="col px-0 text-right">
+                                <span class="text-nowrap" *ngIf="susVendorInfo.employees">{{susVendorInfo.employees}}</span>
+                                <span *ngIf="!susVendorInfo.employees">N/A</span>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <!-- Shop Size -->
+                        <div class="row py-3 px-5 mx-0 justify-content-between">
+
+                            <div class="col px-0">
+                                <span class="mr-3 text-uppercase">Shop Size</span>
+                            </div>
+
+                            <div class="col px-0 text-right">
+                                <span class="text-nowrap" *ngIf="susVendorInfo.shop_size">{{susVendorInfo.shop_size | number}} Sq Ft</span>
+                                <span *ngIf="!susVendorInfo.shop_size">N/A</span>
+                            </div>
+                        </div>
+
+                        <hr>
+
+
+                        <!-- Other NAICS -->
+                        <div class="row py-3 px-5 mx-0 justify-content-between align-items-center">
+
+                            <div class="col px-0">
+                                <span class="mr-3 text-uppercase">Industry Codes</span>
+                            </div>
+
+                            <div class="col px-0 text-right">
+
+                                <span *ngIf="susVendorIndustry.naics_primary" class="bold">{{susVendorIndustry.naics_primary}}</span>
+
+                                <ng-container *ngIf="susVendorIndustry.naics && susVendorIndustry.naics.length > 0">
+                                    <ng-container *ngFor="let naic of susVendorIndustry.naics; let i = index">
+
+                                        <span *ngIf="i === 0 && !susVendorIndustry.naics_primary" class="text-uppercase">{{naic}}</span>
+                                        <span class="text-uppercase">, {{naic}}</span>
+
+                                    </ng-container>
+                                </ng-container>
+
+                                <span *ngIf="!susVendorIndustry.naics || susVendorIndustry.naics.length === 0">N/A</span>
+
+                            </div>
+
+                        </div>
+                        
+                        <hr>
+
+
+                    </div>
+                </div>
+
+            </ng-container>
+
+
+
+        </div>
+    </div>
+</div>
+
+

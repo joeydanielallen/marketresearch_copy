@@ -1,0 +1,65 @@
+
+<div class="col-12 card shadow rounded-lg">
+
+    <div class="overlay-div">
+        <div class="row align-middle mx-0">
+            <div class="col-12 text-center ">
+                <span style="font-size: 25px">Coming Soon ...</span>
+            </div>
+        </div>
+    </div> 
+
+
+
+    <div class="row p-4">
+        <div class="col">
+
+            <h5 class="large-heading mb-0 sustainment-blue">Notifications&nbsp;<i class="fa fa-fort-cog fa-spin icon" *ngIf="isLoading"></i></h5>
+            
+            <hr>
+
+            <div class="row panel-content">
+                <div class="col">
+
+                    <ng-container *ngIf="!isLoading && !hasLoadError">
+                        <ng-container *ngFor="let notif of notifications">
+                            <ng-container *ngIf="notif.title">
+
+                                <div class="row">
+                                    <div class="col-12 my-3 ">
+                                        <div class="row my-2">
+                                            <h6 class="col-11 small-heading sustainment-blue mb-0 text-uppercase">{{notif.title}}</h6>
+                                            <i class="col-1 fa fa-fort-arrow-right sustainment-blue"></i>
+                                        </div>
+                                        
+                                        <h6 class="col-12 sustainment-blue mb-0 px-0">{{notif.description}}</h6>
+                        
+                                    </div>
+                                </div>
+
+
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+
+
+
+                    <div class="col-12 mt-5 text-right">
+                        <span class="sustainment-blue">See all....</span>
+                    </div>
+                   
+
+
+
+                </div>
+
+            </div>
+
+        
+        
+        
+        </div>
+
+    </div>
+</div>
+        

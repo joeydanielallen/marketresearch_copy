@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>afmr.api</name>
+    </assembly>
+    <members>
+        <member name="T:afmr.api.Controllers.ApiControllerBase">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:afmr.api.Controllers.SupportController">
+            <summary>
+            Support services access
+            </summary>
+        </member>
+        <member name="M:afmr.api.Extensions.InjectionExtensions.GetReferencingAssemblies(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="assemblyName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:afmr.api.Logger">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:afmr.api.Logger.LogDebug(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:afmr.api.Logger.LogInformation(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:afmr.api.Logger.LogError(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="errorMessage"></param>
+        </member>
+        <member name="M:afmr.api.Logger.LogError(System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="exception"></param>
+        </member>
+        <member name="M:afmr.api.Logger.LogError(System.Exception,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="exception"></param>
+            <param name="errorMessage"></param>
+        </member>
+        <member name="T:afmr.api.ModelBinders.DateTimeUtcModelBinderProvider">
+            <summary>
+            Enforcing UTC in for Asp.Net actions using DateTime parameters
+            </summary>
+        </member>
+        <member name="M:afmr.api.ModelBinders.DateTimeUtcModelBinderProvider.GetBinder(Microsoft.AspNetCore.Mvc.ModelBinding.ModelBinderProviderContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:afmr.api.Program">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:afmr.api.Program.Main(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:afmr.api.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

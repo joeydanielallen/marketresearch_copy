@@ -1,0 +1,85 @@
+
+<!-- Notes Panel -->
+<div class="card col-12 shadow px-0">
+
+    <!-- Heading -->
+    <div class="card-header p-4 px-5">
+        <span class="large-heading">Notes</span>
+
+        <div *ngIf="mrVendorNotes" (click)="openNewNote()" class="add-note d-inline ml-2">
+            <i class="fa fa-fort-plus"></i>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div *ngIf="mrDataLoading" class="d-inline ml-2">
+            <i style="font-size: 24px;" class="fa fa-fort-cog fa-spin"></i>
+        </div>
+
+    </div>
+
+
+
+    <div class="row mx-0">
+        <div class="col-12 px-0">
+
+            <div *ngIf="showNewNoteTextbox" class="row py-3 px-5 mt-3 mx-0">
+                <input [(ngModel)]="newNoteTitle"  class="col-6 py-2 mb-3" placeholder="Title" >
+                <textarea [(ngModel)]="newNoteText" style="min-height: 100px" class="col-12 py-2 mb-2" placeholder="Note"></textarea>
+                <button class="btn btn-small secondary mr-2" (click)="addNote()">Add New Note</button>
+                <button class="btn btn-small secondary" (click)="cancelAddNote()">Cancel</button>
+            </div>
+
+
+            <div class="row mx-0 panel-content" *ngIf="!showNewNoteTextbox && !mrDataLoading">
+                <div class="col px-0">
+
+
+                    <div class="row py-3 px-5 mt-3 mx-0">
+
+                        <ng-container *ngIf="!mrVendorNotes || mrVendorNotes.length < 1">
+                            <span>There are no notes for this vendor.</span>
+                        </ng-container>
+
+
+                        <ng-container *ngFor="let note of mrVendorNotes">
+
+                            <div class="row mb-4 mx-0">
+
+                                <div class="col-12">
+                                    <span class="small-heading">{{note.title}}</span>
+                                    <i (click)="removeNote(note)" class="fa fa-fort-x ml-2"></i>
+                                    <span class=" ml-2 light-gray">{{note.savedOn | date:'M/d/yyyy'}}</span>
+                                </div>
+
+                                <div class="col-12 mt-1 ml-4">
+                                    <span class=" ">{{note.note}}</span>
+                                </div>
+                                
+                            </div>
+
+                        </ng-container>
+
+
+
+
+                    </div>
+
+
+
+
+
+                </div>
+
+
+
+
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>

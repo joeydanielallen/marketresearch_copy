@@ -1,0 +1,56 @@
+
+<!-- Business Types Panel -->
+<div class="col-12 card shadow px-0">
+
+    <!-- Heading -->
+    <div class="card-header p-4 px-5">
+        <span class="large-heading">Business Attributes</span>
+
+        <!-- Loading Spinner -->
+        <div *ngIf="susDataLoading" class="d-inline ml-2">
+            <i style="font-size: 24px;" class="fa fa-fort-cog fa-spin"></i>
+        </div>
+
+    </div>
+
+
+    <div class="row mx-0">
+        <div class="col px-0">
+
+            <ng-container *ngIf="!susDataLoading">
+
+                <div class="row mx-0 panel-content">
+                    <div class="col px-0">
+
+                        <div class="row py-3 px-5 mx-0 ">
+                            <div class="col px-0">
+
+                                <ng-container  *ngIf="susVendorTypes.sam">
+                                    <ng-container *ngFor="let type of susVendorTypes.sam">
+
+                                        <span class="text-uppercase d-block my-3">{{formatType(type)}}</span>
+
+                                    </ng-container>
+                                </ng-container>
+
+
+                                <span *ngIf="susVendorTypes.sam.length < 1">No Types to Show</span>
+
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+    
+    
+                </div>
+            </ng-container>
+
+
+
+
+        </div>
+    </div>
+</div>

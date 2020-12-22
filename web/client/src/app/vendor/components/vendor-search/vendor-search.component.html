@@ -1,0 +1,388 @@
+
+<!-- Page Heading -->
+<div class="row mb-4 justify-content-between">
+    <div class="col-8 px-0">
+        <h5 class="large-heading">Vendors</h5>
+        <h6 class="small-heading sub-heading">Locate vendors by capabilities and characteristics</h6>
+    </div>
+</div>
+
+
+<!-- Vendor Search -->
+<div class="row mt-5 align-items-center justify-content-between">
+    
+        
+    <div class="col-12 col-xl-8 px-0">
+        <div class="row justify-content-start align-items-center">
+
+            <!-- Filter Buttons -->
+            <div class="col-7">
+                <div class="row ml-0 mr-3 align-items-center">
+                   
+                    <!-- 'selectButton' function changes the 'currentFilter' variable to the id of the button that was clicked, this then updates the class through ngClass -->
+                    <button class="btn mr-1 col-3 py-3 px-0 small-heading" (click)="selectButton($event);searchInput.focus();" [ngClass]="{'filter-button': currentFilter !== 'Name', 'filter-button-selected': currentFilter === 'Name'}" id="Name" type="button">Name</button>
+                    <button class="btn mr-1 col-3 py-3 px-0 small-heading" (click)="selectButton($event);searchInput.focus();" [ngClass]="{'filter-button': currentFilter !== 'Cage', 'filter-button-selected': currentFilter === 'Cage'}" id="Cage" type="button">Cage</button>
+                    <button class="btn mr-1 col-3 py-3 px-0 small-heading" (click)="selectButton($event);searchInput.focus();" [ngClass]="{'filter-button': currentFilter !== 'Duns', 'filter-button-selected': currentFilter === 'Duns'}" id="Duns" type="button">Duns</button>
+                    <button class="btn mr-1 col-3 py-3 px-0 small-heading" (click)="selectButton($event);searchInput.focus();" [ngClass]="{'filter-button': currentFilter !== 'NSN', 'filter-button-selected': currentFilter === 'NSN'}" id="NSN" type="button">NSN</button>
+              
+                </div>
+
+            </div>
+    
+            <!-- Search Bar --> 
+            <div class="col-5 px-0">
+                <div class="row">
+                    <span><i style="font-size: 26px;" class="fa fa-fort-search mt-2 mr-2" title="Search"></i></span>
+                    <input [(ngModel)]="searchText" class="vendor-search px-0 py-2 col-8" placeholder="Search by {{currentFilter}}" #searchInput (keydown)="onKeySearch($event)" />
+                </div>
+            </div>
+    
+        </div>
+    </div>
+
+
+    <!-- Toggle Show Filters -->
+    <div class="col-6 col-xl-2 custom-control custom-switch text-center mt-4 mt-xl-0">
+        <input [checked]="showFilters" (click)="toggleShowFilters()" type="checkbox" class="custom-control-input" id="customSwitches">
+        <label class="custom-control-label" for="customSwitches">Show Filters</label>
+    </div>    
+
+    <!-- Search Button -->
+    <div class="col-4 col-xl-2 mt-4 mt-xl-0">
+        <div class="row justify-content-end">
+            <button [disabled]="searching" (click)="search()" class="btn col-10 secondary size-16 py-3 text-uppercase search-btn">Search <i class="fa fa-fort-cog fa-spin icon" *ngIf="searching"></i></button>
+        </div>
+        
+    </div>
+    
+  
+
+
+
+
+
+</div>
+
+
+<!-- Filters -->
+<div *ngIf="showFilters" class="row card mt-4 mb-5 p-5 shadow">
+
+    <div class="overlay-div rounded-lg">
+        <div style="margin-top: 125px;" class="row mx-0">
+            <div class="col-12 text-center ">
+                <span style="font-size: 25px">Coming Soon ...</span>
+            </div>
+        </div>
+    </div> 
+
+    <!-- Location Filters -->
+    <div class="col-5 col-lg-4 col-xl-3">
+
+       <span class="text-uppercase sustainment-blue d-block mb-4">Location</span> 
+
+       <div class="row mx-0 my-4">
+           <label class="checkbox-label">
+                <input type="checkbox" [checked]="true" >
+                <span class="checkbox-custom rectangular"></span>
+            </label>
+
+            <span class="ml-2 my-auto">Within Radius</span>
+       </div>
+
+       <div class="row mx-0 my-4">
+            <input placeholder="Distance" class="col-8 col-md-6 col-lg-5 col-xl-3 px-0 search-filter">
+            <span class="ml-2 my-auto">Miles</span>
+       </div>
+
+    </div>
+
+    <!-- Size Filters -->
+    <div class="col-5 col-lg-4 col-xl-3">
+        
+       <span class="text-uppercase sustainment-blue d-block mb-4">Size</span> 
+
+       <div class="row mx-0 my-4">
+           <label class="checkbox-label">
+                <input type="checkbox" [checked]="true" >
+                <span class="checkbox-custom rectangular"></span>
+            </label>
+
+            <span class="ml-2 my-auto">Small Batch</span>
+       </div>
+
+       <div class="row mx-0 my-4">
+            <label class="checkbox-label">
+                <input type="checkbox" [checked]="false" >
+                <span class="checkbox-custom rectangular"></span>
+            </label>
+
+            <span class="ml-2 my-auto">Medium Facility</span>
+        </div>
+
+        <div class="row mx-0 my-4">
+             <label class="checkbox-label">
+                 <input type="checkbox" [checked]="false" >
+                 <span class="checkbox-custom rectangular"></span>
+             </label>
+ 
+             <span class="ml-2 my-auto">High Capacity Production</span>
+         </div>
+
+    </div>
+
+    <!-- Processes Filters -->
+    <div class="col-5 col-lg-4 col-xl-3">
+        
+       <span class="text-uppercase sustainment-blue d-block mb-4">Processes</span> 
+
+       <div class="row mx-0 my-4">
+           <label class="checkbox-label">
+                <input type="checkbox" [checked]="true" >
+                <span class="checkbox-custom rectangular"></span>
+            </label>
+
+            <span class="ml-2 my-auto">Miling</span>
+       </div>
+
+       <div class="row mx-0 my-4">
+            <label class="checkbox-label">
+                <input type="checkbox" [checked]="false" >
+                <span class="checkbox-custom rectangular"></span>
+            </label>
+
+            <span class="ml-2 my-auto">Additive Molds</span>
+        </div>
+
+        <div class="row mx-0 my-4">
+             <label class="checkbox-label">
+                 <input type="checkbox" [checked]="false" >
+                 <span class="checkbox-custom rectangular"></span>
+             </label>
+ 
+             <span class="ml-2 my-auto">Specialty CNC</span>
+         </div>
+
+    </div>
+
+    <!-- Materials Filters -->
+    <div class="col-5 col-lg-4 col-xl-3">
+        
+       <span class="text-uppercase sustainment-blue d-block mb-4">Materials</span> 
+
+       <div class="row mx-0 my-4">
+           <label class="checkbox-label">
+                <input type="checkbox" [checked]="true" >
+                <span class="checkbox-custom rectangular"></span>
+            </label>
+
+            <span class="ml-2 my-auto">Metals</span>
+       </div>
+
+       <div class="row mx-0 my-4">
+            <label class="checkbox-label">
+                <input type="checkbox" [checked]="false" >
+                <span class="checkbox-custom rectangular"></span>
+            </label>
+
+            <span class="ml-2 my-auto">Composites</span>
+        </div>
+
+        <div class="row mx-0 my-4">
+             <label class="checkbox-label">
+                 <input type="checkbox" [checked]="false" >
+                 <span class="checkbox-custom rectangular"></span>
+             </label>
+ 
+             <span class="ml-2 my-auto">Specialty</span>
+         </div>
+
+    </div>
+     
+</div>
+
+
+<!-- Page Numbers and Arrows -->
+<div class="row justify-content-start mt-4">
+    <div class="col-12 px-0 text-left">
+
+        <!-- Left Arrows -->
+        <i (click)="firstPage()" *ngIf="pageNumberArray.length > 1" class="fa fa-fort-angles-right fa-flip-horizontal fa-2x left-page-arrow"></i>
+        <i (click)="previousPage()" *ngIf="pageNumberArray.length > 1" class="fa fa-fort-angle-right fa-flip-horizontal left-page-arrow mx-3"></i>
+
+        <!-- Page Numbers -->
+        <ng-container *ngIf="pageNumberArray.length > 1">
+            <ng-container *ngFor="let pageNumber of pageNumberArray">
+                <span (click)="jumpToPage(pageNumber + 1)" [ngClass]="{'current-page-number': pageNumber + 1 === currentPage, 'other-page-number': pageNumber + 1 !== currentPage}" class="mx-2 size-24">{{pageNumber + 1}}</span>
+            </ng-container>
+        </ng-container>
+
+
+        <!-- Right Arrows -->
+        <i (click)="nextPage()" *ngIf="pageNumberArray.length > 1" class="fa fa-fort-angle-right mx-3 right-page-arrow"></i>
+        <i (click)="lastPage()" *ngIf="pageNumberArray.length > 1" class="fa fa-fort-angles-right right-page-arrow"></i>
+
+    </div>
+</div>
+
+
+
+<!-- Column Headers -->
+    <!-- Separated from results to keep recent vendors panel at the same height as results -->
+<div class="row">
+    <div class="col-12 col-xl-8 px-0 pr-xl-3 pl-xl-0">
+
+        <div *ngIf="allSearchResults.length > 0" class="row mx-0 p-4 justify-content-between text-center align-items-center">
+            <span class="col-3 small-heading px-0">Name</span>
+            <span class="col-2 small-heading px-0">Location</span>
+            <span class="col-2 small-heading px-0">Cage Code</span>
+            <span class="col-2 small-heading px-0">Duns ID</span>
+            <span class="col-1"></span>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- Search Results -->
+<div class="row justify-content-between">
+
+    <div class="col-12 col-xl-8 px-0 pr-xl-3 pl-xl-0">
+
+        <ng-container *ngIf="totalPages < 1">
+            <span class="ml-4 size-24">No Vendors Found</span>
+        </ng-container>
+
+        <!-- Search Results -->
+        <ng-container *ngFor="let result of currentPageResults">  
+
+            <!-- MR Vendor -->
+            <ng-container *ngIf="result.id">
+                
+                <div 
+                    (click)="navVendDetail(result)" 
+                    class="row mx-0 card p-4 mb-3 vendor justify-content-between text-center align-items-center shadow">
+
+
+                    <span *ngIf="!result.name" class="col-3 px-0">N/A</span>
+                    <span class="col-3 px-0">{{result.name}}</span>
+
+                    <span *ngIf="!result.city" class="col-2 px-0">N/A</span>
+                    <span *ngIf="result.city" class="col-2 px-0">{{result.city}}, {{result.stateAbbreviation}} {{result.postalCode}}</span>
+                
+
+                    <span *ngIf="result.cageCode.length < 2" class="col-2 px-0">N/A</span>
+                    <span *ngIf="result.cageCode.length > 2" class="col-2 px-0">{{result.cageCode}}</span>
+
+
+                    <span *ngIf="!result.dunsId" class="col-2 px-0">N/A</span>
+                    <span class="col-2 px-0">{{result.dunsId}}</span>
+
+
+                    <span class="col-1">
+                        <i 
+                        [ngClass]="{
+                            'validating': result.valid === undefined,
+                            'valid': result.valid === true,
+                            'not-valid': result.valid === false
+                        }" 
+                        class="fa fa-fort-check-circle fa-2x"></i>
+                    </span>
+
+
+                </div>
+
+            </ng-container>
+
+
+
+            <!-- SUS Vendor -->
+            <ng-container *ngIf="!result.id">
+
+                <!-- Vendor that has one or the other -->
+                <ng-container *ngIf="result.researchVendorId || result.sustainmentVendorId">
+
+                    <div
+                        (click)="navVendDetail(result)" 
+                        class="row mx-0 card p-4 mb-3 vendor justify-content-between text-center align-items-center">
+
+                        <span *ngIf="!result.name" class="col-3 px-0">N/A</span>
+                        <span class="col-3 px-0">{{result.name}}</span>
+
+                        <span *ngIf="!result.city" class="col-2 px-0">N/A</span>
+                        <span *ngIf="result.city" class="col-2 px-0">{{result.city}}, {{result.stateAbbreviation}} {{result.postalCode}}</span>
+                    
+
+                        <span *ngIf="result.cageCode.length < 2" class="col-2 px-0">N/A</span>
+                        <span *ngIf="result.cageCode.length > 2" class="col-2 px-0">{{result.cageCode}}</span>
+
+
+                        <span *ngIf="!result.dunsId" class="col-2 px-0">N/A</span>
+                        <span class="col-2 px-0">{{result.dunsId}}</span>
+
+                        <span class="col-1">
+                            <i 
+                            [ngClass]="{
+                                'validating': result.valid === undefined,
+                                'valid': result.valid === true,
+                                'not-valid': result.valid === false
+                            }" 
+                            class="fa fa-fort-check-circle fa-2x"></i>
+                        </span>
+
+                    </div>
+
+                </ng-container>
+
+
+                <!-- Vendor that doesn't have any Id -->
+                <ng-container *ngIf="!result.researchVendorId && !result.sustainmentVendorId">
+
+                    <div class="row mx-0 card p-4 mb-3 justify-content-between text-center align-items-center">
+
+                        <span *ngIf="!result.name" class="col-3 px-0">N/A</span>
+                        <span class="col-3 px-0">{{result.name}}</span>
+
+                        <span *ngIf="!result.city" class="col-2 px-0">N/A</span>
+                        <span *ngIf="result.city" class="col-2 px-0">{{result.city}}, {{result.stateAbbreviation}} {{result.postalCode}}</span>
+                    
+
+                        <span *ngIf="result.cageCode.length < 2" class="col-2 px-0">N/A</span>
+                        <span *ngIf="result.cageCode.length > 2" class="col-2 px-0">{{result.cageCode}}</span>
+
+
+                        <span *ngIf="!result.dunsId" class="col-2 px-0">N/A</span>
+                        <span class="col-2 px-0">{{result.dunsId}}</span>
+
+                        <span class="col-1">
+                            <i 
+                            [ngClass]="{
+                                'validating': result.valid === undefined,
+                                'valid': result.valid === true,
+                                'not-valid': result.valid === false
+                            }" 
+                            class="fa fa-fort-check-circle fa-2x"></i>
+                        </span>
+
+                    </div>
+
+                </ng-container>
+
+
+
+            </ng-container>
+
+
+
+        </ng-container>
+
+
+    </div>
+
+    <!-- Recent Vendors -->
+    <app-recent-vendors class="col-12 col-xl-4 mt-5 mt-xl-0 px-0 "></app-recent-vendors>
+    
+
+
+</div>

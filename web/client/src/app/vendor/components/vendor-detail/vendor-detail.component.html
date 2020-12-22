@@ -1,0 +1,77 @@
+
+
+<h1 *ngIf="mrVendorDetail && mrVendorDetail.name" class="large-heading">{{mrVendorDetail.name}}</h1>
+
+<div class="row">
+
+    <div class="col-12 col-xl-8 mt-4">
+        <app-vendor-information
+        [mrVendorDetail]="mrVendorDetail"
+        [mrDataLoading]="mrDataLoading"
+        ></app-vendor-information>
+    </div>
+
+    <div class="col-12 col-xl-4 mt-4">
+        <app-vendor-notes 
+        (refreshVendorData)="refreshVendor()" 
+        [mrVendorId]="mrVendorDetail ? mrVendorDetail.id : null" 
+        [mrVendorNotes]="mrVendorDetail ? mrVendorDetail.vendorNotes : null"
+        [mrDataLoading]="mrDataLoading"
+        ></app-vendor-notes>
+    </div>
+
+    <div class="col-12 mt-4">
+        <app-vendor-contacts 
+        [mrDataLoading]="mrDataLoading" 
+        [mrVendorDetail]="mrVendorDetail ? mrVendorDetail : null"
+        ></app-vendor-contacts>
+    </div>
+
+    <div class="col-12 mt-4">
+        <app-vendor-certification
+        [susDataLoading]="susDataLoading"
+        [susVendorCertification]="susVendorDetail ? susVendorDetail.certifications : null"
+        ></app-vendor-certification>
+    </div>
+
+    <div class="col-12 col-xl-6 mt-4">
+        <app-vendor-names
+        [susDataLoading]="susDataLoading"
+        [mrVendorName]="mrVendorDetail ? mrVendorDetail.name : null"
+        [susVendorNames]="susVendorDetail ? susVendorDetail.names : null"
+        [susVendorIds]="susVendorDetail ? susVendorDetail.ids : null"
+        ></app-vendor-names>
+    </div>
+
+    <div class="col-12 col-xl-6 mt-4">
+        <app-vendor-locations
+        [susDataLoading]="susDataLoading"
+        [susVendorLocations]="susVendorDetail ? susVendorDetail.locations : null"
+        ></app-vendor-locations>
+    </div>
+
+    <div class="col-12 col-xl-6 mt-4">
+        <app-vendor-info-short
+        [susDataLoading]="susDataLoading"
+        [susVendorInfo]="susVendorDetail ? susVendorDetail.size : null"
+        [susVendorIndustry]="susVendorDetail ? susVendorDetail.industries : null"
+        ></app-vendor-info-short>
+    </div>
+
+    <div class="col-12 col-xl-6 mt-4">
+        <app-vendor-types
+        [susDataLoading]="susDataLoading"
+        [susVendorTypes]="susVendorDetail ? susVendorDetail.types : null"
+        ></app-vendor-types>
+    </div>
+
+    <div class="col-12 col-xl-6 mt-4">
+        <app-vendor-manufacturing
+        [susDataLoading]="susDataLoading"
+        [susVendorManufacturing]="susVendorDetail ? susVendorDetail.manufacturing : null"
+        ></app-vendor-manufacturing>
+    </div>
+
+
+</div>
+   

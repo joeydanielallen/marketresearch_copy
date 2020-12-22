@@ -1,0 +1,18 @@
+
+.form-label {
+    color: rgb(0, 0, 0);
+}
+
+.ng-input, .ng-select .ng-select-container, input.form-control, input.form-control::placeholder {
+    color: rgba(51, 51, 51, 0.65) !important;
+}
+
+.input-dollar-sign {
+    position: absolute;
+    transform: translate( 10px, 10px);
+    z-index: 5 !important;
+}
+
+div.toFixCardBodyPadding + .card-body {
+    padding-top: 0 !important;
+}

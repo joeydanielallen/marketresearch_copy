@@ -1,0 +1,23 @@
+hr {
+    margin-bottom: 3%;
+    margin-top: 3%;
+    border-top: 1px solid rgba(0,0,0,0.2);
+}
+
+.less-round {
+    border-radius: 5px !important;
+}
+
+.search-button {
+    padding-top: 17px !important;
+    padding-bottom: 15px !important;
+}
+
+#vendor-search-results {
+    flex-direction: row;
+}
+
+.row {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}

@@ -1,0 +1,162 @@
+
+
+.sub-heading {
+    opacity: 0.65;
+}
+
+
+
+.secondary:enabled:hover, .clear:enabled:hover {
+    box-shadow: 1px 1px 5px var(--sustainment-blue);
+}
+
+.user-button:enabled:hover span{
+    display: none;
+}
+
+.user-button {
+    opacity: 1;
+    background-color: #73969A !important; /* Moss */
+    color: white !important; /* Light Gray */
+    border: 2px solid var(--sustainment-blue) !important;
+    transition: all 0.3s ease-in-out ;
+}
+
+.user-button[disabled]:hover {
+    cursor: default;
+}
+
+.user-button:enabled:hover{
+    background-color: rgba(0,0,0,0) !important;
+    transition: border 0.5s ease-in-out ;
+    transition: background-color 0.3s ease-in-out ;
+    
+}
+
+.user-button:enabled:hover {
+    color: var(--sustainment-blue) !important;
+}
+
+
+
+.user-button:enabled:hover:after {
+    content: "Remove User";
+}
+
+
+span {
+    padding: 0 0;
+}
+
+.section {
+}
+
+.section-header {
+    font-size: 18px;
+    font-weight:900;
+
+
+}
+
+.sub-section-header {
+    font-size: 18px;
+}
+
+.question-name {
+}
+
+.question-input {
+}
+
+
+.col-12 {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+
+textarea {
+    min-height: 150px;
+    padding: 15px !important;
+}
+
+.row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.secondary {
+    font-family: Roboto;
+}
+
+.clear {
+    background-color: rgba(0,0,0,0);
+    border: 2px solid var(--sustainment-blue);
+    color: var(--sustainment-blue);
+}
+
+.clear:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+
+.autosave {
+    color: var(--dark-gray) !important;
+    border-bottom: 1px solid var(--dark-gray) !important;
+}
+
+hr {
+    margin-bottom: 3%;
+    margin-top: 3%;
+    border-top: 1px solid rgba(0,0,0,0.2);
+}
+
+
+
+
+.profile-pic-container {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.1s ease-in-out;
+}
+
+
+.profile-pic-container:hover .rounded-circle {
+    cursor: pointer;
+    /* box-shadow: 1px 1px 8px gray; */
+}
+
+.profile-pic-container:hover {
+    transform: scale(1.1);
+    transition: transform 0.1s ease-in-out;
+}
+
+
+.initials {
+    font-size: 22px;
+    text-align: center;
+    padding-top: 3px;
+}
+
+.rounded-circle {
+    color: var(--moss);
+    display: inline-block;
+    background-color: rgba(0,0,0,0);
+    height: 30px;
+    width: 30px;
+    border: 2px solid var(--moss);
+    transition: all 0.3s ease-in-out;
+    
+}
+
+
+
+.search-button {
+    padding-top: 18px !important;
+    padding-bottom: 16px !important;
+    margin-bottom: 2px;
+}
+
+
+

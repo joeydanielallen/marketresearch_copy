@@ -1,0 +1,80 @@
+
+<!-- entire component div -->
+<div class="row card shadow p-2">
+
+
+    <!-- Title and error message  -->
+    <div *ngIf="errorMsg" class="row card-body align-items-center">
+        <div class="card-title col-auto mb-0"></div>
+
+        <div class="col-auto">
+            <div class="alert alert-danger" role="alert" *ngIf="errorMsg">
+                * {{errorMsg}}
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- input form -->
+    <div class="row card-body">
+
+        <!-- NSN Input -->
+        <div class="form-group col-4">
+            <label for="nsn" class="text-nowrap required small form-label" title="13 character NSN, NSN+MAC (2 character), 9 character NIIN, or Part Number">NSN/Part #</label>
+            <input type="text" class="form-control calibri size-16 " id="nsn" name="nsn" placeholder="NSN, NIIN, or Part #" [(ngModel)]="initiateModel.nsn" [disabled]="isDisabled">
+        </div>
+
+        <!-- PRPS ID Input -->
+        <div class="form-group col-4">
+            <label for="prpsId" class="text-nowrap required small form-label" title="Purchase Request Process System Number/Identifier">PRPS Number</label>
+            <input type="text" class="form-control calibri size-16 " id="prpsId" name="prpsId" placeholder="PRPS Number" [(ngModel)]="initiateModel.purchaseRequestProcessingSystemId" [disabled]="isDisabled">
+        </div>
+
+        <!-- Item Quantity Input -->
+        <div class="form-group col-4">
+            <label for="quantity" class="text-nowrap required small form-label" title="Number of items needed">Unit Quantity</label>
+            <input type="number" class="form-control calibri size-16 " placeholder="Enter Quantity"
+                id="quantity" name="quantity" min="0" step="1"
+                [(ngModel)]="initiateModel.itemQuantity" [disabled]="isDisabled">
+        </div> 
+        
+        <!-- Item Value Input -->
+        <div class="form-group col-4">
+            <label for="item-value" class="text-nowrap required small form-label" title="Unit price per item, including surcharges. Must input decimal for cent, no other symbols are required. (Example: 1000.00)">Unit Cost</label>
+            <div class="input-group">
+                <span class="input-dollar-sign">$</span>
+                <input type="number" class="form-control calibri size-16 pl-4"
+                    id="item-value" name="item-value" min="0" step="1" placeholder="Enter Amount"
+                    [(ngModel)]="initiateModel.itemEstimatedValue" [disabled]="isDisabled">
+            </div>
+        </div>
+
+        <!-- Service Select Input -->
+        <div class="form-group col-4">
+            <label for="service" class="required small form-label" title="Buy or repair">Service</label>
+            <ng-select style="margin-top: 3px;" name="service" [searchable]="false" [clearable]="false" labelForId="service" 
+            [items]="serviceItems" bindLabel="value" bindValue="key" [(ngModel)]="initiateModel.serviceType" [disabled]="isDisabled">
+            </ng-select>
+        </div>       
+
+        <!-- Source Select Input -->
+        <div class="form-group col-4">
+            <label for="source" class="required small form-label" title="Location of demand">Source</label>
+            <ng-select style="margin-top: 3px;" name="source" [searchable]="false" [clearable]="false" labelForId="source" 
+            [items]="sourceItems" bindLabel="value" bindValue="key" [(ngModel)]="initiateModel.sourceType" [disabled]="isDisabled">
+            </ng-select>
+        </div>
+
+    </div>
+
+
+    <!-- Initiate Button -->
+    <div class="toFixCardBodyPadding">
+
+    </div>
+    <div syle="margin-top: -20px !important;" class="row card-body justify-content-end">
+        <button style="max-width: none;" class="mr-4 col-2 btn secondary btn-md small-heading py-3" (click)="initiate()" title="" [disabled]="isDisabled">{{buttonText}}</button>
+    </div>
+    
+</div>

@@ -1,0 +1,185 @@
+
+<!-- Names Panel -->
+<div class="col-12 card shadow px-0">
+
+    <!-- Heading -->
+    <div class="card-header p-4 px-5">
+        <span class="large-heading">Names & IDs</span>
+
+        <!-- Loading Spinner -->
+        <div *ngIf="susDataLoading" class="d-inline ml-2">
+            <i style="font-size: 24px;" class="fa fa-fort-cog fa-spin"></i>
+        </div>
+
+    </div>
+
+    <div class="row mx-0">
+        <div class="col px-0">
+            
+            <!-- Fields -->
+            <ng-container *ngIf="!susDataLoading">
+
+                <div class="row mx-0 panel-content">
+                    <div class="col px-0">
+
+                        <!-- MR Profile Name -->
+                        <!-- <ng-container *ngIf="mrVendorName"> 
+                            
+                            <div class="row my-3 justify-content-between">
+                                <div class="col">
+                                    <span class="mr-3 text-uppercase">Profile Name</span>    
+                                </div>
+
+                                <div class="col text-right">
+                                    <span>{{mrVendorName}}</span>
+                                    <span *ngIf="!mrVendorName">N/A</span>
+                                </div>
+                            </div>
+
+                        </ng-container> -->
+
+                        <!-- Legal -->
+                        <div class="row py-3 px-5 mt-3 mx-0 justify-content-between">
+                            <div class="col px-0">
+                                <span class="mr-3 text-uppercase">Legal Name</span>
+                                
+                            </div>
+
+                            <div class="col px-0 text-right">
+                                <span class="text-nowrap" *ngIf="susVendorNames.legal">{{susVendorNames.legal}}</span>
+                                <span *ngIf="!susVendorNames.legal">N/A</span>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <!-- DBAs -->
+                        <div class="row py-3 px-5 mx-0 justify-content-between">
+
+                            <div class="col px-0">
+                                <span class="mr-3 text-uppercase">DBA</span>
+                            </div>
+
+                            <div class="col px-0 text-right">
+
+                                <ng-container *ngIf="susVendorNames.dbAs">
+                                    <ng-container *ngFor="let dba of susVendorNames.dbAs">
+                                        
+                                        <span class="text-uppercase d-block">{{dba}}</span>
+                                        
+                                    </ng-container>
+                                </ng-container>
+
+                                <span *ngIf="susVendorNames.dbAs.length < 1">N/A</span>
+
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <!-- Alias -->
+                        <!-- <div class="row my-3 justify-content-between">
+
+                            <div class="col">
+                                <span class="mr-3 text-uppercase">Alias</span>
+                            </div>
+
+                            <div class="col text-right">
+
+                                <ng-container *ngIf="susVendorNames.akAs">
+                                    <ng-container *ngFor="let alias of susVendorNames.akAs">
+
+                                        <span class="text-uppercase d-block">{{alias}}</span>
+                                        
+                                    </ng-container>
+                                </ng-container>
+
+
+                                <span *ngIf="susVendorNames.akAs.length < 1">N/A</span>
+
+                            </div>
+
+                        </div> -->
+
+
+                        
+
+
+
+                        <!-- DUNS -->
+                        <div class="row py-3 px-5 mx-0 justify-content-between">
+
+                            <div class="col px-0">
+                                <span class="mr-3 text-uppercase">DUNS</span>
+                            </div>
+
+                            <div class="col px-0 text-right">
+                                <span *ngIf="susVendorIds.duns">{{susVendorIds.duns}}</span>
+                                <span *ngIf="!susVendorIds.duns">N/A</span>
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <!-- CAGE -->
+                        <div class="row py-3 px-5 mx-0 justify-content-between">
+
+                            <div class="col px-0">
+                                <span class="mr-3 text-uppercase">CAGE</span>
+                            </div>
+
+                            <div class="col px-0 text-right">
+                                <span *ngIf="susVendorIds.cage">{{susVendorIds.cage}}</span>
+                                <span *ngIf="!susVendorIds.cage">N/A</span>
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <!-- EIN -->
+                        <div class="row py-3 px-5 mx-0 justify-content-between">
+
+                            <div class="col px-0">
+                                <span class="mr-3 text-uppercase">EIN</span>
+                            </div>
+
+                            <div class="col px-0 text-right">
+                                <span *ngIf="susVendorIds.ein">{{susVendorIds.ein}}</span>
+                                <span *ngIf="!susVendorIds.ein">N/A</span>
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <!-- State Number -->
+                        <div class="row py-3 px-5 mx-0 justify-content-between">
+
+                            <div class="col px-0">
+                                <span class="mr-3 text-uppercase">State Incorporation</span>
+                            </div>
+
+                            <div class="col px-0 text-right">
+                                <span *ngIf="susVendorIds.state_number && susVendorIds.state_number.number">{{susVendorIds.state_number.state}}{{susVendorIds.state_number.number}}</span>
+                                <span *ngIf="!susVendorIds.state_number || !susVendorIds.state_number.number">N/A</span>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+            </ng-container>
+
+
+
+        </div>
+    </div>
+</div>
+
+

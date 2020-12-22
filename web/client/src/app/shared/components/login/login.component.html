@@ -1,0 +1,72 @@
+<div class="row justify-content-center" *ngIf="!isLoggedIn()">
+  <div class="col-xs-12 col-lg-7 col-xl-4 p-0 mt-5">
+    <div class="card border-1 rounded-lg">
+
+      <!-- Sustainment Logo -->
+      <div class="row justify-content-center mt-5 mb-3 mx-0 align-items-center">
+        <img class="" width="60%" src="../../../../assets/SUSTAINMENT_Logo_Full_DarkGray.png" />
+      </div>
+
+      <!-- Log In/ Sign Up -->
+      <div class="row justify-content-center my-5 mx-0">
+
+        <div class="col-4 p-0 text-center">
+          <span class="large-heading calibri">Log In</span>
+        </div>
+
+        <div class="col-4 p-0 text-center">
+          <span class="large-heading calibri light-gray">Sign Up</span>
+        </div>
+
+      </div>
+
+      <!-- Email and PW -->
+      <div class="row my-4 mx-0 justify-content-center">
+
+        <div class="col-9 form-group p-0">
+          <label [ngClass]="{'selected': focusEmail}" class="col-12 p-0 light-gray mb-0">Email</label>
+          <input (focus)="emailFocus()" (keyup)="onKeyEnter($event)" (focusout)="emailUnFocus()" class="col-12 py-2 px-1" id="inputEmailAddress" type="email" [(ngModel)]="loginModel.username"/>
+        </div>
+
+        <div class="col-9 form-group p-0">
+          <label [ngClass]="{'selected': focusPassword}" class="col-12 p-0 light-gray mt-4 mb-0">Password</label>
+          <input (focus)="passwordFocus()" (keyup)="onKeyEnter($event)" (focusout)="passwordUnFocus()" class="col-12 py-2 px-0" id="inputPassword" type="password" [(ngModel)]="loginModel.password"/>
+        </div>
+
+      </div>
+
+      <!-- Forgot Pass and Login Button -->
+      <div class="row mx-0 justify-content-around my-4 ">
+
+          <div class="custom-control custom-checkbox my-auto ">
+            <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox" [checked]="loginModel.rememberUser" (change)="loginModel.rememberUser = !loginModel.rememberUser"/>
+            <label class="custom-control-label" for="rememberPasswordCheck"><span>Remember Login</span></label>
+          </div>
+          <button class="btn col-3 primary shadow" (click)="logIn()" [disabled]="isLoggingIn"><span class="small-heading">Login</span>&nbsp;&nbsp;<i class="fa fa-fort-cog fa-spin" *ngIf="isLoggingIn"></i></button>
+      </div>
+
+      <div class="row mx-0 justify-content-center">
+        <div class="col-10 mb-5" style="padding: 10px; margin-top:30px;" *ngIf="showLoginDropdown">
+          <label>OR Choose a user role to login as</label>
+          <ng-select
+            [items]="devLoginList"          
+            bindLabel="role"
+            (change)="selectUserRole($event)"
+            placeholder="Select user role">
+          </ng-select>
+
+        </div>
+      </div>
+
+      <div class="row justify-content-center my-4">
+        <span class="copyright size-12">&copy; 2020 Sustainment</span>
+      </div>
+
+      <div class="row">
+        <div class="alert alert-danger mt-4" *ngIf="errorMsg">
+          {{ errorMsg }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

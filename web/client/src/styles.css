@@ -1,0 +1,342 @@
+/* @import url('https://fonts.googleapis.com/css?family=Roboto'); */
+
+
+:root {
+  --super-light-gray: #F8F8FB;
+  --light-gray: #CBC9C7;
+  --dark-gray: #53565A;
+  --sustainment-blue: #66798E;
+  --moss: #73969A;
+  --machine-mist: #BFD1D3;
+  --cold-smoke: #EEF8FD;
+  --spark: #C05B52;
+  --gradient-dark: linear-gradient(104.17deg, #637280 3.6%, #708E8E 86.69%);
+  --gradient-light: linear-gradient(104.17deg, #637280 3.6%, #BBCCC9 86.69%);
+  --white: #FFFFFF;
+}
+
+/* FOR GLOBAL STYLES */
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFWJ0bbck.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFUZ0bbck.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFWZ0bbck.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFVp0bbck.woff2) format('woff2');
+  unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFWp0bbck.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFW50bbck.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFVZ0b.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* this is to use the FoRt Awesome Kit, not FoNt Awesome */
+i {
+  font-family: MarketResearch !important; 
+}
+
+.outline {
+  color: transparent;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: var(--machine-mist);
+}
+
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+  font-family: 'Open Sans', sans-serif, Arial;
+}
+
+body{ 
+  margin: 0; 
+  color: #53565A;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+}
+a,
+a:visited,
+a:hover {
+  color: #1976d2;
+  text-decoration: none;
+}
+a:hover {
+  color: #125699;
+}
+label {
+  font-size: small;
+}
+
+.primary{
+    background-color: #66798E !important;
+    color: #FFFFFF !important;
+}
+
+input[type=email], input[type=text], input[type=password], input[type=number] {
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+}
+.primary:hover{
+  background-color: #4E5A65 !important;
+}
+
+
+.secondary {
+  background-color: #73969A !important; /* Moss */
+  color: white !important; /* Light Gray */
+}
+
+.secondary:hover {
+  background-color: #566F72 !important;
+  color: white !important;
+}
+
+
+.ng-select .ng-select-container{
+  border-top:0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
+}
+.ng-select {
+  margin-top:-5px;
+}
+
+.card {
+  border-radius: 10px !important;
+}
+
+
+
+.card-body {
+  padding: .75rem !important;
+}
+.card-deck {
+  margin-left:0px !important;
+  margin-right:0px !important;
+  margin-bottom: 1.0rem;
+}
+.required:after {
+  color: var(--spark);
+  content:'*';
+  margin-left: 2px;
+}
+
+
+
+.clear {
+  background-color: rgba(0,0,0,0);
+  border: 2px solid var(--sustainment-blue);
+  color: var(--sustainment-blue);
+}
+
+.clear:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+
+
+
+/* Heading classes */
+
+.large-heading {
+  font-family: 'Open Sans';
+  font-size: 24px;
+  line-height: 29px;
+  text-transform: uppercase;
+}
+
+.small-heading {
+  font-family: Roboto;
+  font-size: 16px;
+  line-height: 19px;
+  text-transform: uppercase;
+}
+
+
+.size-24 {
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.size-16 {
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.size-12 {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+
+
+
+
+/* Classes to add to headers/any text */
+
+.white {
+  color: white !important;
+}
+
+.super-light-gray {
+  color: var(--super-light-gray) !important;
+}
+
+.light-gray {
+  color: var(--light-gray) !important;
+}
+
+.dark-gray {
+  color: var(--dark-gray) !important;
+}
+
+.sustainment-blue {
+  color: var(--sustainment-blue) !important;
+}
+
+.moss {
+  color: var(--moss) !important;
+}
+
+.machine-mist {
+  color: var(--machine-mist) !important;
+}
+
+.cold-smoke {
+  color: var(--cold-smoke) !important;
+}
+
+.spark {
+  color: var(--spark) !important;
+}
+
+.gradient-dark {
+  background-color: var(--gradient-dark) !important;
+}
+
+.gradient-light {
+  background-color: var(--gradient-light) !important;
+}
+
+
+
+.calibri {
+  font-family: 'Open Sans';
+}
+
+.roboto {
+  font-family: Roboto;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+
+
+
+/* Notify Service Alerts Classes */
+
+.alert-success {
+  color: white;
+  background-color: var(--moss);
+}
+
+.alert-info {
+  color: white;
+  background-color: var(--sustainment-blue);
+}
+
+.alert-danger {
+  color: white;
+  background-color: var(--spark);
+}
+
+.toast-fade {
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  opacity: 0 !important;
+  backdrop-filter: none !important;
+  transition: all 0.5s linear;
+}
+
+
+
+
+
+.overlay-div{
+  height:100%;
+  width: 100%;
+  position:absolute;
+  background-color: #FAFAFA;
+  opacity: 0.8;
+  z-index: 3;
+  border-radius: 0.25rem;
+}
+

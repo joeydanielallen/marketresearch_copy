@@ -1,0 +1,277 @@
+
+<div class="row mb-4 section" *ngFor="let section of sections">
+
+
+                
+    <!-- Template Section Group Heading -->
+    <div *ngIf="section.templateSectionGroup" class=" col-12 py-0 px-0 mt-4">
+
+        <div class="row">
+
+            <h6 class="small-heading bold">{{section.templateSectionGroup.name | uppercase}}</h6>
+            
+            <a data-toggle="collapse" href="#sectionGroup_{{section.templateSectionGroup.id}}" >
+                <i *ngIf="section.templateSectionGroup.description" class="col-auto help-icon fa fa-fort-question-circle fa-lg machine-mist" ></i>
+            </a>
+
+        </div>
+        
+        <!-- Help Icon Text -->
+        <ng-container *ngTemplateOutlet="sectionGroupTooltipText; context: section.templateSectionGroup"></ng-container>
+
+    </div>
+
+
+
+    <!--  Section Heading w/o Template Section Grouping -->
+    <div *ngIf="!section.templateSectionGroup" class="col-12 py-0 px-0 mt-5 mb-3">
+
+        <div class="row">
+            
+            <h6 class="small-heading bold">{{section.name | uppercase}}</h6>
+
+            <a data-toggle="collapse" href="#section_{{section.id}}" >
+                <i *ngIf="section.description" class="col-auto help-icon fa fa-fort-question-circle fa-lg machine-mist" ></i>
+            </a>
+
+        </div>
+
+        <!-- Help Icon Text -->
+        <ng-container *ngTemplateOutlet="sectionTooltipText; context: section"></ng-container>
+
+    </div>
+
+
+
+    <!-- Section Heading w/ Template Section Grouping -->
+    <div *ngIf="section.templateSectionGroup" class="col-12 py-0 px-0 mt-4">
+      
+        <div class="row">
+            
+            <h6 class="small-heading">{{section.name | uppercase}}</h6>
+
+            <div>
+                <a data-toggle="collapse" href="#section_{{section.id}}" >
+                    <i *ngIf="section.description" class="col-auto help-icon fa fa-fort-question-circle fa-lg machine-mist" ></i>
+                </a>
+            </div>
+        
+        </div>
+
+        <!-- Help Icon Text -->
+        <ng-container *ngTemplateOutlet="sectionTooltipText; context: section"></ng-container>
+
+    </div>
+
+
+
+
+    <!-- Questions -->
+    <ng-container *ngIf="!section.hasQuestionGrouping">
+        <ng-container *ngFor="let question of section.questions">
+            <app-questions
+                [ngClass]="{'w-50': width50.includes(question.answerType), 'w-100': !width50.includes(question.answerType)}"
+                [templateSectionId]="section.id"
+                [readOnly]="readOnly"
+                [question]="question">
+            </app-questions>
+        </ng-container>
+    </ng-container>
+
+
+    <ng-container *ngIf="section.hasQuestionGrouping">
+        <ng-container *ngIf="section.systemControlTypeId === 1">
+            
+            <div *ngFor="let grouping of groupings">
+                <hr>
+                <div class="row">
+                    <ng-container *ngFor="let question of section.questions">
+                        <app-questions *ngIf="question.answerType != 9"
+                            [ngClass]="{'w-50': width50.includes(question.answerType), 'w-100': !width50.includes(question.answerType)}"
+                            [templateSectionId]="section.id"
+                            [readOnly]="false"
+                            [question]="question"
+                            [answerGroupIndex]="grouping[0].answerGroupIndex">
+                        </app-questions>
+                    </ng-container>
+                </div>
+
+                <div class="row justify-content-start">
+                    <div class="col-6">
+                        <div class="row">
+
+                            <div class="col-3 p-0 mr-3"></div>
+                            <button *ngIf="!isFormCompleted()" class="col-4 small-heading btn btn-md clear p-3" (click)="removeGrouping(grouping, section)">Remove Vendor</button>
+                        
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+            <hr *ngIf="groupings.length > 0" class="col-12"> 
+
+
+
+            <ng-container *ngIf="showVendorSearch && !isFormCompleted()">
+
+                <div class="col-8 mb-2 px-0">
+                    <div class="row justify-content-between">
+                        <input [(ngModel)]="searchText" placeholder="Vendor Name, CAGE, or DUNS" class=" col-12 col-lg-5 search-filter pl-2 py-3" title="Searches " />
+                        <button (click)="searchForVendors()" class="search-button col-12 col-lg-3 small-heading btn btn-md secondary mt-2 mt-lg-0">Search <i class="fa fa-fort-cog fa-spin icon" *ngIf="isVendorSearching"></i></button>
+                        <button [disabled]="readOnly" *ngIf="showVendorSearch && !isFormCompleted()" class="col-12 col-lg-3 small-heading btn btn-md clear p-3 mt-2 mt-lg-0" (click)="hideVendorSearch()">Cancel</button>
+                    </div>
+                </div>  
+
+            </ng-container>
+
+
+            <button [disabled]="readOnly" *ngIf="!showVendorSearch && !isFormCompleted()" class="col-3 small-heading btn btn-md secondary p-3" (click)="displayVendorSearch()">Add Vendor</button>
+               
+
+            <ng-container *ngIf="showVendorSearch && !isFormCompleted()">
+
+                <ng-container *ngIf="vendorsFound === true">
+                    
+                    <div class="col-12 mb-5 px-0">
+
+                        <div id="vendor-search-results" class="row">
+                            <ng-container *ngFor="let vendorResult of vendorResults">
+
+
+                                <div class="col-12 col-lg-6">
+
+
+                                    <div class="row my-2">
+                                        <ng-container *ngIf="!showVendorSelections">
+                                            <button (click)="selectVendor(vendorResult)" class="col-3 small-heading btn btn-sm secondary">Select</button>
+                                            <span class="col-8 ml-2">{{vendorResult.name}}</span>
+                                        </ng-container>
+                                    </div>
+                                    
+
+
+                                    <div class="my-3 row card p-3" *ngIf="showVendorSelections">
+
+                                        <span class="col-12 px-0 text-center my-2">{{vendorResult.name}}</span>
+
+                                        <div class="form-group">
+                                            <span for="pocSelect" class="size-16">Point of Contact: </span>
+                                            <select class="form-control" id="pocSelect">
+                                                <option selected>None</option>
+                                                <ng-container *ngFor="let vendorContact of vendorResult.vendorContacts">
+                                                    <option>{{vendorContact.name}}</option>
+                                                </ng-container>
+                                            </select>
+                                        </div>
+                
+                                        <div class="form-group">
+                                            <span for="partSelect" class="size-16">Part Number: </span>
+                                            <select class="form-control" id="partSelect">
+                                                <option [selected]="true">None</option>
+                                                <ng-container *ngFor="let vendorPart of vendorResult.vendorParts">
+                                                    <option>{{vendorPart.partNumber}}</option>
+                                                </ng-container>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="row justify-content-end">
+                                                <button class="col-3 small-heading btn btn-lg secondary" (click)="confirmSelection(vendorResult, section.id)">confirm</button>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+
+
+                            </ng-container>
+
+                        </div>
+
+                    </div>
+
+
+                </ng-container>
+
+
+
+                <ng-container *ngIf="vendorsFound === false">
+                    <div class="col-12 px-0 my-2">
+                        <span class="m-0 size-24">No Vendors Found</span>
+                    </div>
+                </ng-container>
+
+
+                <ng-container *ngIf="vendorsFound === false || vendorsFound === true">
+                    <hr class="col-12 my-1">
+                </ng-container>
+
+            </ng-container>
+
+
+                
+
+            
+
+            
+                
+            
+             
+
+
+            
+            
+            
+
+            
+        </ng-container>
+
+        
+
+    </ng-container>
+    
+
+
+
+
+    <ng-template  #sectionTooltipText let-id="id" let-desc="description">
+
+        <!-- Help Icon Text -->
+        <div class="col-12">
+            <div class="row">
+
+                <div id="section_{{id}}" class="collapse col-auto card">
+                    <div [innerHTML]="desc" class="p-2 calibri"></div>
+                </div>
+
+            </div>
+        </div>
+
+    </ng-template>
+
+
+    <ng-template  #sectionGroupTooltipText let-id="id" let-desc="description" >
+
+        <!-- Help Icon Text -->
+        <div class="col-12">
+            <div class="row">
+
+                <div id="sectionGroup_{{id}}" class="collapse col-auto card">
+                    <div [innerHTML]="desc" class="p-2 calibri"></div>
+                </div>
+
+            </div>
+        </div>
+
+    </ng-template>
+
+
+
+
+</div>
+
+

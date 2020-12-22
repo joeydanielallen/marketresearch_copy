@@ -1,0 +1,22 @@
+
+.panel-content {
+    height: 205px;
+    padding-right: 30px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 7px;
+    background-color: rgba(0, 0, 0, 0.15);
+    border: 0;
+}
+
+hr {
+    margin-left: -40px;
+    margin-right: -40px;
+}

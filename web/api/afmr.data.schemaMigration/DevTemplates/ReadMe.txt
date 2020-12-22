@@ -1,0 +1,2 @@
+﻿To use the T4 (.tt) files to generate code, right click and choose "Run Custom Tool" from the context dialog menu.
+Enter the migration file name using "Action" as Prefix and entity e.g. CreateTable, AddTableData.

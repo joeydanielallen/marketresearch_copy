@@ -1,0 +1,95 @@
+
+<!-- Certifications Panel -->
+<div class="card col-12 shadow px-0">
+
+    <!-- Heading -->
+    <div class="card-header p-4 px-5">
+        <span class="large-heading">Certifications</span>
+
+        <!-- Loading Spinner -->
+        <div *ngIf="susDataLoading" class="d-inline ml-2">
+            <i style="font-size: 24px;" class="fa fa-fort-cog fa-spin"></i>
+        </div>
+
+    </div>
+
+
+
+    <div class="row mx-0">
+        <div class="col-12 px-0">
+
+            <!-- Fields -->
+            <ng-container *ngIf="!susDataLoading">
+
+                <div class="row mx-0 panel-content">
+                    <div class="col px-0">
+                
+                        <!-- Null Check -->
+                        <ng-container *ngIf="susVendorCertification.length < 1">
+                            <div class="row py-3 px-5 mt-2 mx-0 ">
+                                <span>There are no certifications for this vendor.</span>
+                            </div>
+                        </ng-container>
+
+
+                        <!-- Column Headers -->
+                        <ng-container *ngIf="susVendorCertification.length > 0">
+                            <div class="row py-3 px-5 mt-3 mx-0 justify-content-between text-center mb-3">
+
+                                <div class="col-1"></div>
+                                <div class="col-3 bold small-heading text-left">Name</div>
+                                <div class="col-3 bold small-heading text-left">Certifier</div>
+                                <div class="col-2 bold small-heading text-left d-none d-lg-block">Received On</div>
+                                <div class="col-2 bold small-heading text-left">Expires On</div>
+                                
+                            </div>
+                        </ng-container>
+
+                        <!-- Column Data -->
+                        <ng-container *ngFor="let cert of susVendorCertification; let i = index">
+                            <ng-container *ngIf="cert.name !== 'sba' ">
+
+                                <hr *ngIf="i !== 1">
+
+                                <div class="row py-2 px-5 mx-0 justify-content-between text-center my-3 align-items-center">
+
+                                    <div class="col-1 text-right">
+                                        <a 
+                                            href="{{cert.file}}"
+                                            target="_blank"
+                                            [ngClass]="{ 'not-active' : cert.file === null }" 
+                                            class="py-2 px-3 border-0 br-25 view-file text-uppercase text-nowrap">View</a>
+                                    </div>
+                                    
+                                    <div *ngIf="cert.name" class="col-3 text-left">{{cert.name}}</div>
+                                    <div *ngIf="!cert.name" class="col-3 text-left">N/A</div>
+
+                                    <div *ngIf="cert.certifier" class="col-3 text-left">{{cert.certifier}}</div>
+                                    <div *ngIf="!cert.certifier" class="col-3 text-left">N/A</div>
+
+                                    <div *ngIf="cert.date" class="col-2 text-left d-none d-lg-block">{{cert.date | date:'M/d/yyyy' }}</div>
+                                    <div *ngIf="!cert.date" class="col-2 text-left d-none d-lg-block">N/A</div>
+
+                                    <div *ngIf="cert.expiration" class="col-2 text-left text-nowrap">{{cert.expiration | date:'M/d/yyyy' }}</div>
+                                    <div *ngIf="!cert.expiration" class="col-2 text-left">N/A</div>
+                                    
+                                </div>
+
+                                
+                            
+                            </ng-container>
+
+                        </ng-container>
+
+                 
+                    </div>
+                </div>
+
+            </ng-container>
+
+
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,120 @@
+
+
+<!-- Filter Buttons and Search Bar -->
+<div style="height: 45px;" class="row justify-content-between">
+
+    <!-- Filter Buttons -->
+    <div class="col-6 col-lg-5">
+        <div style="height: 100%;" class="row justify-content-start">
+            
+            <!-- 'selectButton' function changes the 'currentFilter' variable to the id of the button that was clicked, this then updates the class through ngClass -->
+            <div class="col-3 px-0 mr-1"><button (click)="removeFilters()" [ngClass]="{'filter-button': currentFilter !== 'all', 'filter-button-selected': currentFilter === 'all'}" id="all" type="button" class="btn btn-primary btn-md">All</button></div>
+            <div class="col-3 px-0 mr-1"><button (click)="filterByWorking()" [ngClass]="{'filter-button': currentFilter !== 'working', 'filter-button-selected': currentFilter === 'working'}" id="working" type="button" class="btn btn-primary btn-md">Working</button></div>
+            <div class="col-4 px-0 mr-1"><button (click)="filterByCompleted()" [ngClass]="{'filter-button': currentFilter !== 'completed', 'filter-button-selected': currentFilter === 'completed'}" id="completed" type="button" class="btn btn-primary btn-md">Completed</button></div>
+        </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="col-6 col-lg-4" *ngIf="!isLoading">
+        <span><i class="fa fa-fort-search fa-lg mr-2" title="Search"></i></span>
+        <input [(ngModel)]="searchText" placeholder="Search" class="search-filter ml-1 pl-2" />
+    </div>
+
+</div>
+
+
+
+
+
+<!-- Div for Displaying of User's Templates -->
+<div class="row">
+    <div class="col-12">
+
+        <div *ngIf="isLoading" class="m-5">
+            <i class="fa fa-fort-cog fa-spin icon "></i>&nbsp; Loading...
+        </div>
+
+        <!-- Creates 'searchResults' array even if empty. The 'filter' is a custom pipe -->
+        <ng-container *ngIf="(showingTemplates | filter: searchText) as searchResults">
+
+
+            <!-- Message to user of findings -->
+            <div *ngIf="!isLoading && searchResults.length === 0" class="my-3 py-2">
+                <h5 *ngIf="currentFilter !== 'all'">No {{currentFilter}} market research</h5>
+                <h5 *ngIf="currentFilter === 'all'">No market research</h5>
+            </div>
+
+
+            <!-- Column Headers -->
+            <!-- Only displays column headers if there are templates -->
+            <div *ngIf="showingTemplates.length > 0 && searchResults.length > 0" class="row column-headers mt-3">
+                <div class=" col-12 ">
+
+                    <!-- Some columns aren't wanted after the breakpoint, so changed the display to none -->
+                    <div class="row align-items-center text-center justify-content-around">
+                        <span class="col-3 col-lg-2">TITLE</span>
+                        <span class="col-1">ID</span>
+                        <span class="col-2 d-none d-lg-block">DATE STARTED</span>
+                        <span class="col-2 d-none d-lg-block" *ngIf="currentFilter === 'working'">PROGRESS STATUS</span>
+                        <span class="col-2 d-none d-lg-block" *ngIf="currentFilter === 'completed'">COMPLETED</span>
+                        <span class="col-2 d-none d-lg-block" *ngIf="currentFilter === 'all'">PROGRESS / COMPLETED</span>
+
+                        <span class="col-1 d-block d-lg-none">STATUS</span>
+                        <span class="col-2 col-lg-1">OWNER</span>
+                        <!-- <span class="col-2 d-none d-lg-block">LAST VIEWED</span> -->
+
+                        <!-- This column is here to keep the headers spaced the same as the templates -->
+                        <div class="col-1"></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- User Temaplates -->
+            <!-- Using 'searchResults' to show the templates that were returned from the 'filter' pipe -->
+            <div *ngFor="let template of searchResults"> 
+
+                <div class="row card shadow my-3 py-2">
+                    <div class="card-body col-12 ">
+
+                        <!-- Some values aren't wanted after the breakpoint, so changed the display to none -->
+                        <div class="row align-items-center text-center justify-content-around">
+
+                            <span class="col-3 col-lg-2">{{template.title}}</span>
+
+                            <span class="col-1">{{template.id}}</span>
+
+                            <span class="col-2 d-none d-lg-block">{{template.createdOnUtc | date:'M/d/yyyy'}}</span>
+
+                            <div class="col-2 d-none d-lg-block px-0 progress" style="height: 5px;" *ngIf="template.completedOnUtc == null">
+                                <div class="progress-bar" [style.width]="template.progressComplete + '%'" style="height: 5px;"></div>
+                            </div>
+
+                            <span class="col-2 d-none d-lg-block px-0" *ngIf="template.completedOnUtc != null">{{template.completedOnUtc | date:'M/d/yyyy'}}</span>
+
+                            <div class="profile-pic-container col-2 col-lg-1 px-0">
+                                <!-- <img *ngIf="template.owner.profilePicLink" class="profile-pic" src="../../../../../../../assets/{{template.owner.profilePicLink}}"> -->
+                                <span class="rounded-circle" title="{{template.createdByAppUser.firstName + ' ' + template.createdByAppUser.lastName}}"><p class="initials">{{template.createdByAppUserInitials}}</p></span>
+                            </div>
+
+                            <!-- <span class="col-2 d-none d-lg-block">{{template.lastViewed | date:'M/d/yyyy h:mm a'}}</span> -->
+
+                            <div class="col-1">
+                                <div class="row justify-content-end">
+                                    <div class="col-6 d-none d-lg-block copy-link fa-lg"><i (click)="copyTemplateLink(template.id)" class="fa fa-fort-upload"></i></div>
+                                    <div class="col-12 col-lg-6 open-template fa-lg"><i (click)="openTemplate(template.id, template.completedOnUtc)" class="fa fa-fort-arrow-right"></i></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </ng-container>
+        
+    </div>
+</div>
+
